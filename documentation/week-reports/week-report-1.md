@@ -15,12 +15,12 @@ This week I learned about the stable marriage problem and what kind of stuff sho
 
 ##  What has been inclear or problematic? 
 
-I found only one algorithm to use in my project. I will probably apply the Gale-Shapley algorhitm some way as described in (Stable marriage with indifference Wikipedia article)[https://en.wikipedia.org/wiki/Stable_marriage_with_indifference] or something. I'm not quite sure how to expand my use of algorhitms in the project or where to look for good algorithms.
+I found only one algorithm to use in my project. I will probably apply the Gale-Shapley algorhitm some way as described in (Stable marriage with indifference Wikipedia article)[https://en.wikipedia.org/wiki/Stable_marriage_with_indifference] or something. I'm not quite sure how to expand my use of algorhitms in the project or where to look for useful algorithms.
    
 ## What next?
 
-Should start the project.
+Should start coding the project.
 
 ## Hours used
 
-In this week I have worked total 3 hours with this project.
+Past week I have worked total 3 hours with this project.
