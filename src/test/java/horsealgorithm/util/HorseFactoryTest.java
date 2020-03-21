@@ -10,6 +10,7 @@ public class HorseFactoryTest {
     public void RandomHorseIsCreated() {
         HorseFactory hf = new HorseFactory();
         Horse h = hf.makeHorse();
-        assertNotNull(h);    }
+        assertNotNull(h);
+        }
 
 }
