@@ -15,8 +15,8 @@ public class MatchCalculatorTest {
 
     @Before
     public void setUp() {
-        horse = new Horse("TestHorse", "TestSkillLevel", 177, "TestType");
-        rider = new Rider("TestName", "TestSkillLevel", 170, "TestType");
+        horse = new Horse("TestHorse", "advanced", 177, "dressage");
+        rider = new Rider("TestName", "advanced", 170, "dressage");
         m = new MatchCalculator();
     }
 
@@ -36,9 +36,9 @@ public class MatchCalculatorTest {
 
     @Test
     public void TestMediumMatchingScore() {
-        horse.setSkillLevel("differentSkillLevel");
+        horse.setSkillLevel("easy");
         double d = m.calculateCompatibility(horse, rider);
-        assertEquals(0.5, d, 0.0001);
+        assertEquals(0.8, d, 0.0001);
     }
 
     @Test
@@ -57,10 +57,10 @@ public class MatchCalculatorTest {
 
     @Test
     public void TestBadMatchingScore2() {
-        rider.setSkillLevel("different");
+        rider.setSkillLevel("easy");
         rider.setType("alsoDifferent");
         double d = m.calculateCompatibility(horse, rider);
-        assertEquals(0.0, d, 0.0001);
+        assertEquals(0.5, d, 0.0001);
     }
 
 }
