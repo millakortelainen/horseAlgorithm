@@ -5,6 +5,9 @@ import horsealgorithm.domain.Horse;
 import java.lang.reflect.Array;
 import java.util.*;
 
+/**
+ * Horse Factory creates random horses.
+ */
 public class HorseFactory {
 
     private String[] names = { "Gomer", "Donkey", "Radio Flyer", "Hoofer", "Lostma Cowboy", "Klip Klop", "Foalovit",
@@ -17,6 +20,11 @@ public class HorseFactory {
 
     private String[] types = { "dressage", "show jumping", "kids", "cross country" };
 
+    /**
+     * Method to ceate a random horse.
+     * 
+     * @return randomly generated horse
+     */
     public Horse makeHorse() {
         Random r = new Random();
         String horseName = this.names[r.nextInt(this.names.length)];
@@ -27,6 +35,12 @@ public class HorseFactory {
         return new Horse(horseName, horseSkillLevel, horseHeight, horseType);
     }
 
+    /**
+     * Creates as many horses as given as a parameter n.
+     * 
+     * @param n amount of created horses
+     * @return ArrayList of randomly generated horses.
+     */
     public ArrayList<Horse> makeHorses(int n) {
         ArrayList<Horse> horses = new ArrayList<>();
         for (int i = 0; i < n; i++) {
