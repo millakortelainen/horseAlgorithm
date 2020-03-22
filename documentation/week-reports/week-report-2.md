@@ -4,7 +4,7 @@
 
   ## What have you done this week?
 
- This week I started coding. Setting up gradle project took most of my time. The horse algorithm is now in walking skeleton phase. It has some functionalities yet it is quite raw still. 
+ This week I started coding. Setting up gradle project took most of my time. The horse algorithm is now in walking skeleton phase.
     
  ## How has the project progressed?
 
