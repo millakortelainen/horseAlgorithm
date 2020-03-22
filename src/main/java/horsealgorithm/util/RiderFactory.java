@@ -1,7 +1,7 @@
 package horsealgorithm.util;
 
 import horsealgorithm.domain.Rider;
-import java.util.Random;
+import java.util.*;
 
 public class RiderFactory{
 
@@ -26,6 +26,13 @@ public class RiderFactory{
         String riderType = this.types[r.nextInt(this.types.length)];
         
         return new Rider(riderName, riderSkillLevel, riderHeight, riderType);
+    }
+    public ArrayList<Rider> makeRiders(int n) {
+        ArrayList<Rider> riders = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            riders.add(this.makeRider());
+        }
+        return riders;
     }
 
 }
