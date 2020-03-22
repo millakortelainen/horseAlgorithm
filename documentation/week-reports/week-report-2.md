@@ -12,7 +12,7 @@ Project has progressed well. It even has some functionalities now. I did the cor
 
 ## What did you learn this week / today?
 
-This week I learned about setting up a gradle application. This included a learning experience about how important it is to update build.grade-file. I mean for a while I thought that I can't do a simple Scanner reader for my program but then I realised that my build-gradle-file didin't have all the needed code. 
+This week I learned about setting up a gradle application. This included a learning experience about how important it is to update build.grade-file. I mean for a while I thought that I can't do a simple Scanner reader for my program but then I realised that my build.gradle-file didn't have all the needed code. 
 
 I learned to make a generic data structure for pairs. I needed this kind of data structure for my horses and riders. This is where I found little bit contradictory information from the internet. Stack exchange told me that there isn't such data structure in Java but in Java documentation I found a documentation of pairs. Anyway I decided to create the data structure by myself.
 
