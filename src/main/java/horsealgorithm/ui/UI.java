@@ -6,7 +6,9 @@ import java.util.Scanner;
 
 import horsealgorithm.util.*;
 import horsealgorithm.domain.*;
-
+/**
+ * User Inteface of the application.
+ */
 public class UI {
 
     public void start() {

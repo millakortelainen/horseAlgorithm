@@ -2,7 +2,9 @@ package horsealgorithm.util;
 
 import java.util.*;
 import horsealgorithm.domain.*;
-
+/**
+ * Pairs up horses and riders;
+ */
 public class PairFactory {
 
     public ArrayList<Pair<Horse, Rider>> pairAll(ArrayList<Horse> horses, ArrayList<Rider> riders) {

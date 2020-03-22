@@ -2,7 +2,9 @@ package horsealgorithm.util;
 
 import horsealgorithm.domain.*;
 import java.util.*;
-
+/**
+ * Class Match Calculator is a calculator which calculates scores of horse-rider pairs.
+ */
 public class MatchCalculator {
 
     public double calculateCompatibility(Horse horse, Rider rider) {

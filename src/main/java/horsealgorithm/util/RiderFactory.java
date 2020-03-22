@@ -2,7 +2,9 @@ package horsealgorithm.util;
 
 import horsealgorithm.domain.Rider;
 import java.util.*;
-
+/**
+ * Creates random riders from pool of names, skill-levels and types.
+ */
 public class RiderFactory{
 
     private String[] names = {"Julius Meyer","Emmett Talley","Barry Ball",
