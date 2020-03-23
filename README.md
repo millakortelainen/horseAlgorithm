@@ -5,3 +5,4 @@
 ## Week reports
 
 [First week](documentation/week-reports/week-report-1.md)
+[Second week](documentation/week-reports/week-report-2.md)
