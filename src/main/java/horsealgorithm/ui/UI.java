@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import horsealgorithm.util.*;
 import horsealgorithm.domain.*;
+
 /**
  * User Inteface of the application.
  */
@@ -39,12 +40,12 @@ public class UI {
                 }
 
             } else if (fun == 3) {
-                ArrayList<Pair<Horse, Rider>> pairs = new PairFactory().pairAll(horses, riders);
-                HashMap<Double, ArrayList<Pair<Horse, Rider>>> scores = new MatchCalculator().calculateAllScores(pairs);
+                ArrayList<Pair> pairs = new PairFactory().pairAll(horses, riders);
+                HashMap<Double, ArrayList<Pair>> scores = new MatchCalculator().calculateAllScores(pairs);
                 for (Double key : scores.keySet()) {
                     System.out.println("Compatibility Level " + key);
-                    for (Pair<Horse, Rider> p : scores.get(key)) {
-                        System.out.println(p.getKey().getName() + " and " + p.getValue().getName());
+                    for (Pair p : scores.get(key)) {
+                        System.out.println(p.getHorse().getName() + " and " + p.getRider().getName());
                     }
                     System.out.println("");
                 }

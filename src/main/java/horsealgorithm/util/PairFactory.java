@@ -2,6 +2,7 @@ package horsealgorithm.util;
 
 import java.util.*;
 import horsealgorithm.domain.*;
+
 /**
  * Pairs up horses and riders;
  */
@@ -12,14 +13,13 @@ public class PairFactory {
      * 
      * @param horses horses to be paired
      * @param riders riders to be paired
-     * @return ArrayList of horse-rider pairs. 
+     * @return ArrayList of horse-rider pairs.
      */
-    public ArrayList<Pair<Horse, Rider>> pairAll(ArrayList<Horse> horses, ArrayList<Rider> riders) {
-        ArrayList<Pair<Horse, Rider>> pairs = new ArrayList<>();
+    public ArrayList<Pair> pairAll(ArrayList<Horse> horses, ArrayList<Rider> riders) {
+        ArrayList<Pair> pairs = new ArrayList<>();
         for (Horse h : horses) {
             for (Rider r : riders) {
-                Pair<Horse, Rider> p = new Pair<>();
-                p.setPair(h, r);
+                Pair p = new Pair(h, r);
                 pairs.add(p);
             }
         }

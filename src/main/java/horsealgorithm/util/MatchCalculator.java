@@ -60,16 +60,17 @@ public class MatchCalculator {
     }
 
     /**
-     * Calculates score to all given riders and horses. 
+     * Calculates score to all given riders and horses.
      * 
      * @param list all horse-rider pairs to be calculated.
      * @return HashMap where the key is compatibility score.
      */
-    public HashMap<Double, ArrayList<Pair<Horse, Rider>>> calculateAllScores(ArrayList<Pair<Horse, Rider>> list) {
+    public HashMap<Double, ArrayList<Pair>> calculateAllScores(ArrayList<Pair> list) {
 
-        HashMap<Double, ArrayList<Pair<Horse, Rider>>> scores = new HashMap<>();
-        for (Pair<Horse, Rider> p : list) {
-            double score = this.calculateCompatibility(p.getKey(), p.getValue());
+        HashMap<Double, ArrayList<Pair>> scores = new HashMap<>();
+        for (Pair p : list) {
+            double score = this.calculateCompatibility(p.getHorse(), p.getRider());
+            setFavoritesToRiders(p.getRider(), p.getHorse(), score);
             if (!scores.containsKey(score)) {
                 scores.put(score, new ArrayList<>());
             }
@@ -77,6 +78,51 @@ public class MatchCalculator {
         }
 
         return scores;
+    }
+
+    /**
+     * Checks the riders favorite horses. If the score of the rider and horse is
+     * better than old favorite horse, then sets the horse as a new favorite horse.
+     * 
+     * @param r     rider
+     * @param h     horse
+     * @param score score of rider and horse
+     */
+    public void setFavoritesToRiders(Rider r, Horse h, double score) {
+        Horse[] favHorses = r.getFavoriteHorses();
+
+        for (int i = 0; i < r.getFavoriteHorses().length; i++) {
+            if (r.getFavoriteHorses()[i] == null) {
+                favHorses[i] = h;
+                i = r.getFavoriteHorses().length;
+            } else if (this.calculateCompatibility(r.getFavoriteHorses()[i], r) < score) {
+                favHorses[i] = h;
+            }
+        }
+        r.setFavoriteHorses(favHorses);
+
+    }
+
+    public void GSAlgorithmForPairing(ArrayList<Horse> horses, ArrayList<Rider> riders) {
+        // all horses and rider in the initialized list are free
+        // index of the list is rider, rider without horse is 0
+        int[] pairs = new int[riders.size() + 1];
+        // stack for free riders and horses
+        ArrayDeque<Integer> freeRiders = new ArrayDeque<>();
+        ArrayDeque<Integer> freeHorses = new ArrayDeque<>();
+        for (Horse horse : horses) {
+            freeHorses.add(horse.getId());
+        }
+        for (Rider rider : riders) {
+            freeRiders.add(rider.getId());
+        }
+        // as long as there are free riders and horses, they will be paired
+        while (!freeRiders.isEmpty() && !freeHorses.isEmpty()) {
+            // first free horse
+            int h = freeHorses.peek();
+
+        }
+
     }
 
 }

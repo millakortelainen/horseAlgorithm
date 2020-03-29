@@ -15,8 +15,8 @@ public class MatchCalculatorTest {
 
     @Before
     public void setUp() {
-        horse = new Horse("TestHorse", "advanced", 177, "dressage");
-        rider = new Rider("TestName", "advanced", 170, "dressage");
+        horse = new Horse(1, "TestHorse", "advanced", 177, "dressage");
+        rider = new Rider(1, "TestName", "advanced", 170, "dressage");
         m = new MatchCalculator();
     }
 

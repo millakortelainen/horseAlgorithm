@@ -9,7 +9,7 @@ public class HorseTest {
 
     @Before
     public void setUp() {
-        horse =  new Horse("TestHorse", "TestSkillLevel", 177, "TestType");
+        horse =  new Horse(1,"TestHorse", "TestSkillLevel", 177, "TestType");
     }
     
     @Test 

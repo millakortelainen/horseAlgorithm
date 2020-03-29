@@ -1,24 +1,52 @@
 package horsealgorithm.domain;
 
-public class Pair<V, T> {
-    private V key;
-    private T value;
+public class Pair {
+    private Horse horse;
+    private Rider rider;
 
-    public void setPair(V key, T value){
-        this.key = key;
-        this.value = value;
+    public Pair(Horse horse, Rider rider) {
+        this.horse = horse;
+        this.rider = rider;
     }
 
-    public V getKey(){
-        return key;
+    /**
+     * @param horse the horse to set
+     */
+    public void setHorse(Horse horse) {
+        this.horse = horse;
     }
 
-    public T getValue(){
-        return value;
+    /**
+     * @param rider the rider to set
+     */
+    public void setRider(Rider rider) {
+        this.rider = rider;
+    }
+
+    /**
+     * @return the horse
+     */
+    public Horse getHorse() {
+        return horse;
+    }
+
+    /**
+     * @return the rider
+     */
+    public Rider getRider() {
+        return rider;
     }
 
     @Override
     public String toString() {
-        return "" + key + ", " + value + "";
+        return "" + horse + ", " + rider + "";
     }
+
+    public int compareTo(Pair p) {
+        if (p.getHorse().getId() == this.horse.getId() && p.getRider().getId() == this.rider.getId()) {
+            return 1;
+        }
+        return 0;
+    }
+
 }

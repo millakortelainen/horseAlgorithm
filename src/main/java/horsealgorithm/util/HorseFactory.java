@@ -20,6 +20,8 @@ public class HorseFactory {
 
     private String[] types = { "dressage", "show jumping", "kids", "cross country" };
 
+    private int lastID = 0;
+
     /**
      * Method to ceate a random horse.
      * 
@@ -31,8 +33,8 @@ public class HorseFactory {
         String horseSkillLevel = this.skillLevels[r.nextInt(this.skillLevels.length)];
         int horseHeight = 100 + r.nextInt(96);
         String horseType = this.types[r.nextInt(this.types.length)];
-
-        return new Horse(horseName, horseSkillLevel, horseHeight, horseType);
+        this.lastID++;
+        return new Horse(lastID, horseName, horseSkillLevel, horseHeight, horseType);
     }
 
     /**
