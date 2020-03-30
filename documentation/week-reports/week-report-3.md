@@ -2,13 +2,11 @@
 # Week 3 report
 
 
-  ## What have you done this week?
-
+## What have you done this week?
 I started implementing [the Gale-Shapley algorithm](https://en.wikipedia.org/wiki/Gale%E2%80%93Shapley_algorithm). This led me to change the generic type of Pair-object as a typed object and creation of rider's favorite horses. 
     
  ## How has the project progressed?
-
-Unfortunately my time was very limited this week and the project itself progressed little but I didn't have time to make any tests for it. Core functionalities are progressing because I started implementing the main algorithm that I will use in the program.
+Unfortunately my time was very limited this week and the project itself progressed little. I didn't have time to make any tests for it. Core functionalities are progressing because I started implementing the main algorithm that I will use in the program.
 
 ## What did you learn this week / today?
 
@@ -20,7 +18,7 @@ I found out that I can't avoid all the slow stuff. The time complexity of the Ga
 Everything is going well.
 
 ## What next?
-Rider's favorite list needs fixing. Now it lists same horses. I should finish the Gale-Shapley algorithm. After I finish these I start making the experience variable for rider which I didn't start this week.
-## Hours used
+Rider's favorite list needs fixing. Now it lists same horses but there should be only one of each. I should finish the Gale-Shapley algorithm. After I finish these I start making the experience variable for rider which I didn't start this week.
 
+## Hours used
 Past week I have worked total 5 hours with this project.
