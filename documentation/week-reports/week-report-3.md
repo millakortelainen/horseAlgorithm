@@ -4,7 +4,7 @@
 
   ## What have you done this week?
 
-I started implementing (the Gale-Shapley algorithm)[https://en.wikipedia.org/wiki/Gale%E2%80%93Shapley_algorithm]. This led me to change the generic type of Pair-object as a typed object and creation of rider's favorite horses. 
+I started implementing [the Gale-Shapley algorithm](https://en.wikipedia.org/wiki/Gale%E2%80%93Shapley_algorithm). This led me to change the generic type of Pair-object as a typed object and creation of rider's favorite horses. 
     
  ## How has the project progressed?
 
