@@ -10,7 +10,7 @@ Unfortunately my time was very limited this week and the project itself progress
 
 ## What did you learn this week / today?
 
-I learned how implementing algorithm is not as easy as just reading the description and implementing it. There is some desicions to make when one is applying the algorithm. I had little pondering which data structures to use so that they are fast and easy enough to implement. Making the Gale-Shapley algorithm led me to switch the Pair-data structure and create the id number for horses and riders because the graph is easier to handle with these parameters. I found it enlightening to noticing that applying an algorithm makes an snowball effect and creates small little problems to the development.
+I learned how implementing algorithm is not as easy as just reading the description and coding it. There is some decisions to make when one is applying the algorithm. I had little pondering which data structures to use so that they are fast and easy enough to implement. Making the Gale-Shapley algorithm led me to switch the Pair-data structure and create the id number for horses and riders because the graph is easier to handle with these parameters. I found it enlightening to noticing that applying an algorithm makes an snowball effect and creates small little problems to the development.
 
 I found out that I can't avoid all the slow stuff. The time complexity of the Gale-Shapley algorithm is O(n^2) and even before using the algorithm I have to pair all the horses to all the riders once. This function also has O(n^2) complexity. Even if the overall time complexity doesn't increase I feel uncomfortable pairing all horses to all riders because this feels slow.
 
