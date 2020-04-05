@@ -1,24 +1,22 @@
 
-# Week 3 report
+# Week 4 report
 
 
 ## What have you done this week?
-I started implementing [the Gale-Shapley algorithm](https://en.wikipedia.org/wiki/Gale%E2%80%93Shapley_algorithm). This led me to change the generic type of Pair-object as a typed object and creation of rider's favorite horses. 
-    
+In past week I got the Gale-Shapley algorithm ready and wrote quite a few unit tests.
+
  ## How has the project progressed?
-Unfortunately my time was very limited this week and the project itself progressed little. I didn't have time to make any tests for it. Core functionalities are progressing because I started implementing the main algorithm that I will use in the program.
+ I thinkt that project progressed very well in this week. The project's core functionalities are now ready so in the future I can focus on expanding the project and doing performance testing.
 
 ## What did you learn this week / today?
 
-I learned how implementing algorithm is not as easy as just reading the description and coding it. There is some decisions to make when one is applying the algorithm. I had little pondering which data structures to use so that they are fast and easy enough to implement. Making the Gale-Shapley algorithm led me to switch the Pair-data structure and create the id number for horses and riders because the graph is easier to handle with these parameters. I found it enlightening to noticing that applying an algorithm makes an snowball effect and creates small little problems to the development.
-
-I found out that I can't avoid all the slow stuff. The time complexity of the Gale-Shapley algorithm is O(n^2) and even before using the algorithm I have to pair all the horses to all the riders once. This function also has O(n^2) complexity. Even if the overall time complexity doesn't increase I feel uncomfortable pairing all horses to all riders because this feels slow.
+This week I keep learning about the same thing that I started learning last week. This means that I continued to learn about how to implement an algorthm from pseudo code. I'm wondering how my own version of the algorithm ended up so much different than the pseudo code algorithm.
 
 ##  What has been inclear or problematic? 
 Everything is going well.
 
 ## What next?
-Rider's favorite list needs fixing. Now it lists same horses but there should be only one of each. I should finish the Gale-Shapley algorithm. After I finish these I start making the experience variable for rider which I didn't start this week.
+Next I'm going to write performance tests.
 
 ## Hours used
 Past week I have worked total 5 hours with this project.
