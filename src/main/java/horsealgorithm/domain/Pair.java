@@ -39,7 +39,7 @@ public class Pair {
 
     @Override
     public String toString() {
-        return "" + horse + ", " + rider + "";
+        return "" + horse.getName() + ", " + rider.getName() + "";
     }
 
     public int compareTo(Pair p) {

@@ -94,14 +94,14 @@ public class MatchCalculator {
         boolean added = false;
         for (int i = 0; i < r.getFavoriteHorses().length; i++) {
             if (favHorses[i] == null) {
-               if(!added) {
-                favHorses[i] = h;
-                added = true;
-            }
-            } else if (this.calculateCompatibility(r.getFavoriteHorses()[i], r) < score) {
-                if(!added){
+                if (!added) {
                     favHorses[i] = h;
-                    added=true;
+                    added = true;
+                }
+            } else if (this.calculateCompatibility(r.getFavoriteHorses()[i], r) < score) {
+                if (!added) {
+                    favHorses[i] = h;
+                    added = true;
                 }
             }
         }
@@ -109,48 +109,76 @@ public class MatchCalculator {
 
     }
 
-    public void GSAlgorithmForPairing(ArrayList<Horse> horses, ArrayList<Rider> riders) {
-        // all horses and rider in the initialized list are free
-        // index of the list is rider, rider without horse is 0
-        ArrayList<Rider> ordRiders = riders.stream().sorted((r1,r2)->{
-            return r1.getId()-r2.getId();
+    /**
+     * Method pairs horses and riders based on pair's score using Gale-Shapley
+     * algorithm.
+     * 
+     * @param horses List of horses
+     * @param riders List of riders
+     * @return List of horse-rider-pairs.
+     */
+    public ArrayList<Pair> GSAlgorithmForPairing(ArrayList<Horse> horses, ArrayList<Rider> riders) {
+        ArrayList<Rider> sortedRiders = riders.stream().sorted((r1, r2) -> {
+            return r1.getId() - r2.getId();
         }).collect(Collectors.toCollection(ArrayList::new));
+        ArrayList<Horse> sortedHorses = horses.stream().sorted((h1, h2) -> {
+            return h1.getId() - h2.getId();
+        }).collect(Collectors.toCollection(ArrayList::new));
+        int[] horsesRider = new int[horses.size() + 1];
 
-        for(Rider r :ordRiders){
-            System.out.println(r);
-        }
-
-        int[] horsesRider = new int[horses.size()+1];
-        // stack for free riders and horses
         ArrayDeque<Rider> freeRiders = new ArrayDeque<>();
-       
         for (Rider rider : riders) {
             freeRiders.add(rider);
         }
-        // as long as there are free riders and horses, they will be paired
-        while (!freeRiders.isEmpty()) {
-            //first rider in stack
-            Rider r = freeRiders.poll();
-            Horse rFirst = r.getFavoriteHorses()[0];
-            //Is riders first choise free
-            if(horsesRider[rFirst.getId()]==0){
-            //pair is made
-                horsesRider[rFirst.getId()]=r.getId();
-            }
-            //horse is somebodyelses pair
-            else{
-                // if horses score is better with this rider become a pair
-                //rider list should be ordered by id
-                Rider r3 = ordRiders.get(horsesRider[rFirst.getId()-1]);
-                if(this.calculateCompatibility(rFirst,r) > this.calculateCompatibility(rFirst,r3)){
-                    freeRiders.add(riders.get(horsesRider[rFirst.getId()]));
-                    horsesRider[rFirst.getId()]=r.getId();
-                } 
-                
-            }
 
+        while (!freeRiders.isEmpty()) {
+            Rider r = freeRiders.poll();
+            boolean riderHasHorse = false;
+            for (int i = 0; i < 3; i++) {
+                Horse ridersFavoriteHorse = r.getFavoriteHorses()[i];
+                if (ridersFavoriteHorse == null) {
+                    continue;
+                }
+                if (horsesRider[ridersFavoriteHorse.getId()] == 0) {
+                    horsesRider[ridersFavoriteHorse.getId()] = r.getId();
+                    riderHasHorse = true;
+                    break;
+                } else {
+                    int otherRidersId = horsesRider[ridersFavoriteHorse.getId()];
+                    Rider otherRider = sortedRiders.get(otherRidersId - 1);
+                    if (this.calculateCompatibility(ridersFavoriteHorse, r) > this
+                            .calculateCompatibility(ridersFavoriteHorse, otherRider)) {
+                        horsesRider[ridersFavoriteHorse.getId()] = r.getId();
+                        if (otherRider.getId() != r.getId()) {
+                            freeRiders.add(otherRider);
+                        }
+                        riderHasHorse = true;
+                        break;
+                    }
+                }
+
+            }
+            if (!riderHasHorse) {
+                for (int i = 1; i < horsesRider.length; i++) {
+                    if (horsesRider[i] == 0) {
+                        horsesRider[i] = r.getId();
+                        break;
+                    }
+                }
+            }
 
         }
+        ArrayList<Pair> ridersAndHorses = new ArrayList<>();
+        for (int i = 1; i < horsesRider.length; i++) {
+            if (horsesRider[i] == 0) {
+                continue;
+            }
+            int ridersId = horsesRider[i];
+
+            ridersAndHorses.add(new Pair(sortedHorses.get(i - 1), sortedRiders.get(ridersId - 1)));
+        }
+        System.out.println(Arrays.toString(horsesRider));
+        return ridersAndHorses;
 
     }
 

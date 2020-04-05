@@ -21,12 +21,14 @@ public class UI {
         int numberOfHorses = Integer.parseInt(n);
         System.out.println("How many riders there are?");
         int numberOfRiders = Integer.parseInt(reader.nextLine());
-        System.out.println("*generating " + numberOfHorses + " horses and" + numberOfRiders + " riders*");
+        System.out.println("*generating " + numberOfHorses + " horses and " + numberOfRiders + " riders*");
         ArrayList<Horse> horses = new HorseFactory().makeHorses(numberOfHorses);
         ArrayList<Rider> riders = new RiderFactory().makeRiders(numberOfRiders);
+        boolean pairsAreCounted = false;
         while (true) {
             System.out.println("Press \n" + "1: show horses \n" + "2: show riders \n"
-                    + "3: calculate the compatibility of horses and riders\n" + "4: quit");
+                    + "3: calculate the compatibility of horses and riders \n4: calculate best horse for rider \n"
+                    + "5: quit");
             int fun = Integer.parseInt(reader.nextLine());
 
             if (fun == 1) {
@@ -49,8 +51,21 @@ public class UI {
                     }
                     System.out.println("");
                 }
+                pairsAreCounted = true;
 
             } else if (fun == 4) {
+                if (!pairsAreCounted) {
+                    ArrayList<Pair> pairs = new PairFactory().pairAll(horses, riders);
+                    new MatchCalculator().calculateAllScores(pairs);
+                    pairsAreCounted = true;
+                }
+                ArrayList<Pair> pairs = new MatchCalculator().GSAlgorithmForPairing(horses, riders);
+                for (Pair p : pairs) {
+                    System.out.println(p);
+                }
+                System.out.println("");
+            } else if (fun == 5) {
+                System.out.println("Goodbye!");
                 break;
             } else {
                 System.out.println("Invalid command");

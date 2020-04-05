@@ -1,8 +1,6 @@
 package horsealgorithm.util;
 
 import horsealgorithm.domain.Horse;
-
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
