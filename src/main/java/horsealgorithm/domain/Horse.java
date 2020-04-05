@@ -84,7 +84,30 @@ public class Horse {
     public void setId(int id) {
         this.id = id;
     }
+    
+ @Override
+    public boolean equals(Object o) {
+    if (this == o) {
+        return true;
+    }
 
+    if (!(o instanceof Horse)) {
+        return false;
+    }
+    
+    Horse horse2 = (Horse) o;
+
+    if (this.name.equals(horse2.getName())
+    &&this.id==horse2.getId() && this.type.equals(horse2.getType())
+    && this.skillLevel.equals(horse2.getSkillLevel()) 
+    && this.height==horse2.getHeight()) {
+        return true;
+    }
+
+    return false;
+}
+
+    @Override
     public String toString() {
         return "HORSE INFO: \n" + this.id + ". " + "Name: " + this.name + "\n" + "Skill Level: " + this.skillLevel
                 + "\n" + "Height: " + this.height + " cm \n" + "Type: " + this.type;

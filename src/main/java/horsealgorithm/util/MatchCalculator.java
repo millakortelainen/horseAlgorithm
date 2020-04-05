@@ -2,6 +2,7 @@ package horsealgorithm.util;
 
 import horsealgorithm.domain.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Class Match Calculator is a calculator which calculates scores of horse-rider
@@ -90,13 +91,18 @@ public class MatchCalculator {
      */
     public void setFavoritesToRiders(Rider r, Horse h, double score) {
         Horse[] favHorses = r.getFavoriteHorses();
-
+        boolean added = false;
         for (int i = 0; i < r.getFavoriteHorses().length; i++) {
-            if (r.getFavoriteHorses()[i] == null) {
+            if (favHorses[i] == null) {
+               if(!added) {
                 favHorses[i] = h;
-                i = r.getFavoriteHorses().length;
+                added = true;
+            }
             } else if (this.calculateCompatibility(r.getFavoriteHorses()[i], r) < score) {
-                favHorses[i] = h;
+                if(!added){
+                    favHorses[i] = h;
+                    added=true;
+                }
             }
         }
         r.setFavoriteHorses(favHorses);
@@ -106,20 +112,43 @@ public class MatchCalculator {
     public void GSAlgorithmForPairing(ArrayList<Horse> horses, ArrayList<Rider> riders) {
         // all horses and rider in the initialized list are free
         // index of the list is rider, rider without horse is 0
-        int[] pairs = new int[riders.size() + 1];
-        // stack for free riders and horses
-        ArrayDeque<Integer> freeRiders = new ArrayDeque<>();
-        ArrayDeque<Integer> freeHorses = new ArrayDeque<>();
-        for (Horse horse : horses) {
-            freeHorses.add(horse.getId());
+        ArrayList<Rider> ordRiders = riders.stream().sorted((r1,r2)->{
+            return r1.getId()-r2.getId();
+        }).collect(Collectors.toCollection(ArrayList::new));
+
+        for(Rider r :ordRiders){
+            System.out.println(r);
         }
+
+        int[] horsesRider = new int[horses.size()+1];
+        // stack for free riders and horses
+        ArrayDeque<Rider> freeRiders = new ArrayDeque<>();
+       
         for (Rider rider : riders) {
-            freeRiders.add(rider.getId());
+            freeRiders.add(rider);
         }
         // as long as there are free riders and horses, they will be paired
-        while (!freeRiders.isEmpty() && !freeHorses.isEmpty()) {
-            // first free horse
-            int h = freeHorses.peek();
+        while (!freeRiders.isEmpty()) {
+            //first rider in stack
+            Rider r = freeRiders.poll();
+            Horse rFirst = r.getFavoriteHorses()[0];
+            //Is riders first choise free
+            if(horsesRider[rFirst.getId()]==0){
+            //pair is made
+                horsesRider[rFirst.getId()]=r.getId();
+            }
+            //horse is somebodyelses pair
+            else{
+                // if horses score is better with this rider become a pair
+                //rider list should be ordered by id
+                Rider r3 = ordRiders.get(horsesRider[rFirst.getId()-1]);
+                if(this.calculateCompatibility(rFirst,r) > this.calculateCompatibility(rFirst,r3)){
+                    freeRiders.add(riders.get(horsesRider[rFirst.getId()]));
+                    horsesRider[rFirst.getId()]=r.getId();
+                } 
+                
+            }
+
 
         }
 
