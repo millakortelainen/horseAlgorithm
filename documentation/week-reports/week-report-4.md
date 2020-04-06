@@ -16,7 +16,7 @@ This week I keep learning about the same thing that I started learning last week
 Everything is going well.
 
 ## What next?
-Next I'm going to write performance tests. I should also consider what data structures I want to implement myself.
+Next I'm going to write performance tests. I should also consider what data structures I want to implement myself. Although I haven't begun the performance testing, I did study [it from the exmaple project](https://github.com/TiraLabra/Testing-and-rmq/tree/master/src/main/java/rmq/util). Performance testing Is totally new to me. I believe that next week will be very instructive for me. I probably should also schedule couple extra hours for working on the project because the nature of the testing is new to me.
 
 ## Hours used
 Past week I have worked total 14 hours with this project.
