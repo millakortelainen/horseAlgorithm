@@ -6,7 +6,7 @@
 In past week I got the Gale-Shapley algorithm ready and wrote quite a few unit tests.
 
  ## How has the project progressed?
- I thinkt that project progressed very well in this week. The project's core functionalities are now ready so in the future I can focus on expanding the project and doing performance testing.
+ I thinkt that project progressed very well in this week. The project's core functionalities are now ready so in the future I can focus on expanding the project and doing performance testing. One of this week's submission requirements was that performance testing has begun. This is where I'm falling behind little bit but I'm able to start performance testing next week so I'm not falling behind that bad.
 
 ## What did you learn this week / today?
 
@@ -16,7 +16,7 @@ This week I keep learning about the same thing that I started learning last week
 Everything is going well.
 
 ## What next?
-Next I'm going to write performance tests.
+Next I'm going to write performance tests. I should also consider what data structures I want to implement myself.
 
 ## Hours used
-Past week I have worked total 5 hours with this project.
+Past week I have worked total 14 hours with this project.
