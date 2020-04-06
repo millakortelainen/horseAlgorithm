@@ -1,8 +1,8 @@
 # the horse algorithm
 
-[Project specification](documentation/project-specification.md)
-[Impelementation document](documentation/implementation-document.md)
-[Testing document](documentation/testing-document.md)
+* [Project specification](documentation/project-specification.md)
+* [Impelementation document](documentation/implementation-document.md)
+* [Testing document](documentation/testing-document.md)
 
 ## Week reports
 
