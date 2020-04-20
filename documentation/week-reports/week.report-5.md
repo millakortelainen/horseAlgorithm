@@ -1,7 +1,7 @@
 # Week 5 report
 ## What have you done this week?
 
-I have done the peroformance tests for the Gale-Shapely algorithm and continued writing the documentation of the project. I removed the Java .stream() code from my algorithm which did the sorting of the lists and replaced it with compareble-interface because of the last week's feedback.
+I have done the peroformance tests for the Gale-Shapely algorithm and continued writing the documentation of the project. Due the last weeks's feed back I removed the Java .stream() code from my algorithm which did the sorting of the lists and replaced it with compareble-interface.
 
 ## How has the project progressed?
 
