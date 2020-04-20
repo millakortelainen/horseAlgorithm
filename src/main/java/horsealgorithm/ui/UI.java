@@ -3,6 +3,7 @@ package horsealgorithm.ui;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.*;
 
 import horsealgorithm.util.*;
 import horsealgorithm.domain.*;
@@ -13,6 +14,7 @@ import horsealgorithm.domain.*;
 public class UI {
 
     public void start() {
+
         Scanner reader = new Scanner(System.in);
         System.out.println("Welcome!");
         System.out.println("In this application you can pair horses and riders");
@@ -28,7 +30,8 @@ public class UI {
         while (true) {
             System.out.println("Press \n" + "1: show horses \n" + "2: show riders \n"
                     + "3: calculate the compatibility of horses and riders \n4: calculate best horse for rider \n"
-                    + "5: quit");
+                    + "5: runt tests \n "
+                    + "6: quit");
             int fun = Integer.parseInt(reader.nextLine());
 
             if (fun == 1) {
@@ -65,8 +68,15 @@ public class UI {
                 }
                 System.out.println("");
             } else if (fun == 5) {
+                System.out.println("Testing..");
+                Tester t = new Tester();
+                t.run();
+                System.out.println("Test ended");
+            } else if (fun == 6) {
+
                 System.out.println("Goodbye!");
                 break;
+
             } else {
                 System.out.println("Invalid command");
             }

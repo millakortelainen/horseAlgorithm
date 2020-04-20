@@ -1,6 +1,6 @@
 package horsealgorithm.domain;
 
-public class Rider {
+public class Rider implements Comparable<Rider>{
     private int id;
     private String name;
     private String skillLevel;
@@ -112,6 +112,17 @@ public class Rider {
         }
         return "RIDER INFO: \n" + this.id + ". " + "Name: " + this.name + "\n" + "Skill Level: " + this.skillLevel
                 + "\n" + "Height: " + this.height + " cm \n" + "Type: " + this.type + "\nTop 3 horses: \n" + horses;
+    }
+
+    @Override
+    public int compareTo(Rider r) {
+        if (this.id == r.getId()) {
+            return 0;
+        }
+        if (this.id > r.getId()) {
+            return 1;
+        }
+        return -1;
     }
 
 }

@@ -2,7 +2,6 @@ package horsealgorithm.util;
 
 import horsealgorithm.domain.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Class Match Calculator is a calculator which calculates scores of horse-rider
@@ -118,15 +117,15 @@ public class MatchCalculator {
      * @return List of horse-rider-pairs.
      */
     public ArrayList<Pair> GSAlgorithmForPairing(ArrayList<Horse> horses, ArrayList<Rider> riders) {
-        ArrayList<Rider> sortedRiders = riders.stream().sorted((r1, r2) -> {
-            return r1.getId() - r2.getId();
-        }).collect(Collectors.toCollection(ArrayList::new));
-        ArrayList<Horse> sortedHorses = horses.stream().sorted((h1, h2) -> {
-            return h1.getId() - h2.getId();
-        }).collect(Collectors.toCollection(ArrayList::new));
+
+        Collections.sort(riders);
+        
+        Collections.sort(horses);
+        
         int[] horsesRider = new int[horses.size() + 1];
 
         ArrayDeque<Rider> freeRiders = new ArrayDeque<>();
+        
         for (Rider rider : riders) {
             freeRiders.add(rider);
         }
@@ -145,7 +144,7 @@ public class MatchCalculator {
                     break;
                 } else {
                     int otherRidersId = horsesRider[ridersFavoriteHorse.getId()];
-                    Rider otherRider = sortedRiders.get(otherRidersId - 1);
+                    Rider otherRider = riders.get(otherRidersId - 1);
                     if (this.calculateCompatibility(ridersFavoriteHorse, r) > this
                             .calculateCompatibility(ridersFavoriteHorse, otherRider)) {
                         horsesRider[ridersFavoriteHorse.getId()] = r.getId();
@@ -175,9 +174,8 @@ public class MatchCalculator {
             }
             int ridersId = horsesRider[i];
 
-            ridersAndHorses.add(new Pair(sortedHorses.get(i - 1), sortedRiders.get(ridersId - 1)));
+            ridersAndHorses.add(new Pair(horses.get(i - 1), riders.get(ridersId - 1)));
         }
-        System.out.println(Arrays.toString(horsesRider));
         return ridersAndHorses;
 
     }
