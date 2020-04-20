@@ -1,11 +1,11 @@
 # Week 5 report
 ## What have you done this week?
 
-I have done the peroformance tests for the Gale Shapely algorithm and continued writung the documentation of the project.
+I have done the peroformance tests for the Gale-Shapely algorithm and continued writing the documentation of the project.
 
 ## How has the project progressed?
 
-The project itself didin't really progressed this week and I'm quite unhappy about it. 
+The project itself didin't really progressed this week and I'm quite unhappy about it. Although the tests and documentation are now in pretty good shape in my opinion. 
 
 ## What did you learn this week / today?
 
@@ -13,7 +13,7 @@ Performance testing was new to me so that gave me a good change to learn.
 
 ## What has been inclear or problematic?
 
-Everything is going well.
+Everything is going well application wise.
 
 ## What next?
 
