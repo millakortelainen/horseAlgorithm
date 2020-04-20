@@ -17,7 +17,7 @@ Everything is going well application wise.
 
 ## What next?
 
-I'd like to make the analysis of the performance tests using linear regression to compare the performance to the expected performance which is n^2. I'd like to make a brute force algorithm for calculating the optimal pairs of the horses and riders and compare that approach to Gale Shapley algorithm. 
+I am going to make the analysis of the performance tests using linear regression to compare the performance to the expected performance which is n^2. I'd like to make a brute force algorithm for calculating the optimal pairs of the horses and riders and compare that approach to Gale Shapley algorithm. 
 
 ## Hours used
 
