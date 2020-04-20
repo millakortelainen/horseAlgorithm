@@ -5,7 +5,7 @@ I have done the peroformance tests for the Gale-Shapely algorithm and continued 
 
 ## How has the project progressed?
 
-The project itself didin't really progressed this week and I'm quite unhappy about it. Although the tests and documentation are now in pretty good shape in my opinion. 
+The project itself didin't really progressed this week and I'm quite unhappy about it. Although the tests and documentation are now in pretty good shape in my opinion. I removed the Java .stream() code from my algorithm which did the sorting of the lists and replaced it with compareble-interface because of the last week's feedback.
 
 ## What did you learn this week / today?
 
