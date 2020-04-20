@@ -1,11 +1,11 @@
 # Week 5 report
 ## What have you done this week?
 
-I have done the peroformance tests for the Gale-Shapely algorithm and continued writing the documentation of the project.
+I have done the peroformance tests for the Gale-Shapely algorithm and continued writing the documentation of the project. I removed the Java .stream() code from my algorithm which did the sorting of the lists and replaced it with compareble-interface because of the last week's feedback.
 
 ## How has the project progressed?
 
-The project itself didin't really progressed this week and I'm quite unhappy about it. Although the tests and documentation are now in pretty good shape in my opinion. I removed the Java .stream() code from my algorithm which did the sorting of the lists and replaced it with compareble-interface because of the last week's feedback.
+The project itself didn't really progressed this week and I'm quite unhappy about it. Although the tests and documentation are now in pretty good shape in my opinion. 
 
 ## What did you learn this week / today?
 
@@ -17,7 +17,7 @@ Everything is going well application wise.
 
 ## What next?
 
-I am going to make the analysis of the performance tests using linear regression to compare the performance to the expected performance which is n^2. I'd like to make a brute force algorithm for calculating the optimal pairs of the horses and riders and compare that approach to Gale Shapley algorithm. 
+I am going to make the analysis of the performance tests using linear regression to compare the performance to the expected performance which is n^2. I'd like to make a brute force algorithm for calculating the optimal pairs of the horses and riders and compare that approach to Gale Shapley algorithm. I could also try to optimize the Gale-Shapley algorithm and analyse how that affects to performance. Now the algorithm's code includes sorting and stuff like that which could be done elsewhere.
 
 ## Hours used
 
