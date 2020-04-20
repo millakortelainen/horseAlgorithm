@@ -7,11 +7,11 @@ The application is unit tested by JUnit.
 
 [insert here stuff from jacoco]
 
-The performance of the application is tested in the class called "Tester.java". 
+The performance of the application is tested in the class called "Tester.java". The performance tests use Java function System.nanotime() to conclude the duration of opertaion of the algorithms. The Gale-Shapley algorithm is tested 50 times with parameters of 10, 100, 1 000, 10 000 and 100 000 pairs of horses and riders. Then the average of these runs is calculated to determine the performance of the algorithm.
 
 ## What types of input were used
 
-
+The input for the Gale-Shapely algorithm is generated using the HorseFactory and RiderFactory classes. With these classes n riders and horses are generated and then given to the algorithm for processing.
 
 ## How can the tests be repeated
 
