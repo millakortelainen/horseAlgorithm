@@ -119,13 +119,13 @@ public class MatchCalculator {
     public ArrayList<Pair> GSAlgorithmForPairing(ArrayList<Horse> horses, ArrayList<Rider> riders) {
 
         Collections.sort(riders);
-        
+
         Collections.sort(horses);
-        
+
         int[] horsesRider = new int[horses.size() + 1];
 
         ArrayDeque<Rider> freeRiders = new ArrayDeque<>();
-        
+
         for (Rider rider : riders) {
             freeRiders.add(rider);
         }
@@ -178,6 +178,53 @@ public class MatchCalculator {
         }
         return ridersAndHorses;
 
+    }
+
+    public void pairingAlgo(ArrayList<Pair> pairs, ArrayList<Rider> riders) {
+        // talleta kaikki parhaat parit tähän listaan
+        ArrayList<Pair> bestPairs = new ArrayList<>();
+        // käy kaikki ratsastajat läpi
+        for (Rider r : riders) {
+            double bestScore = -1;
+            // katso mikä on ratsastajan paras tulos
+            for (Pair p : pairs) {
+                if (p.getScore() > bestScore && p.getRider().getId() == r.getId()) {
+                    bestScore = p.getScore();
+                }
+            }
+            // hae pari, ensimmäinen kelpaa
+            for (Pair p : pairs) {
+                if (p.getScore() == bestScore && p.getRider().getId() == r.getId()) {
+                    bestPairs.add(p);
+                    break;
+                }
+            }
+            // tarkista kellä on sama hevonen
+            ArrayList<Integer> horseIds = new ArrayList<>();
+            // parit jolla oli sama hevonen
+            ArrayDeque<Pair> samePairs = new ArrayDeque<>();
+            for (Pair p : bestPairs) {
+
+                if (horseIds.contains(p.getHorse().getId())) {
+                    //jos hevosen id oli jo olemassa niin pareja on useampi
+                    samePairs.add(p);
+                } else {
+                    //muutoin hevosen id lisätään listaan
+                    horseIds.add(p.getHorse().getId());
+                }
+            }
+            //seuraavaksi pitäisi määritellä miten saman hevosen omaava ihminen saa uuden hevosen
+        }
+    }
+
+    public ArrayDeque<Rider> makeQueueOfRiders(ArrayList<Rider> riders) {
+        ArrayDeque<Rider> freeRiders = new ArrayDeque<>();
+
+        for (Rider rider : riders) {
+            freeRiders.add(rider);
+        }
+
+        return freeRiders;
     }
 
 }

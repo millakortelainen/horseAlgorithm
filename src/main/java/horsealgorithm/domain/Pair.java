@@ -3,10 +3,12 @@ package horsealgorithm.domain;
 public class Pair {
     private Horse horse;
     private Rider rider;
+    private double score;
 
     public Pair(Horse horse, Rider rider) {
         this.horse = horse;
         this.rider = rider;
+        this.score = -1;
     }
 
     /**
@@ -35,6 +37,20 @@ public class Pair {
      */
     public Rider getRider() {
         return rider;
+    }
+
+    /**
+     * @param score the score to set
+     */
+    public void setScore(double score) {
+        this.score = score;
+    }
+
+    /**
+     * @return the score
+     */
+    public double getScore() {
+        return score;
     }
 
     @Override
