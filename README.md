@@ -12,3 +12,4 @@
 * [Third week](documentation/week-reports/week-report-3.md)
 * [Fourth week](documentation/week-reports/week-report-4.md)
 * [Fifth week](documentation/week-reports/week-report-5.md)
+* [Sixth week](documentation/week-reports/week-report-6.md)
