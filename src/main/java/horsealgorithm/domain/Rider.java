@@ -1,20 +1,29 @@
 package horsealgorithm.domain;
 
-public class Rider implements Comparable<Rider>{
+public class Rider implements Comparable<Rider> {
     private int id;
     private String name;
-    private String skillLevel;
+    private int skillLevel;
     private int height;
-    private String type;
-    private Horse[] favoriteHorses;
+    private int type;
+    private Pair[] favoriteHorses;
 
-    public Rider(int id, String name, String skillLevel, int height, String type) {
+    public Rider(int id, String name, int skillLevel, int height, int type) {
         this.id = id;
         this.name = name;
         this.skillLevel = skillLevel;
         this.height = height;
         this.type = type;
-        this.favoriteHorses = new Horse[3];
+        this.favoriteHorses = new Pair[3];
+    }
+
+    public Rider(int id) {
+        this.id = id;
+        this.name = "RiderName" + id;
+        this.skillLevel = 999;
+        this.height = 123;
+        this.type = 999;
+        this.favoriteHorses = new Pair[3];
     }
 
     /**
@@ -41,14 +50,14 @@ public class Rider implements Comparable<Rider>{
     /**
      * @return the skillLevel
      */
-    public String getSkillLevel() {
+    public int getSkillLevel() {
         return skillLevel;
     }
 
     /**
      * @return the type
      */
-    public String getType() {
+    public int getType() {
         return type;
     }
 
@@ -76,42 +85,67 @@ public class Rider implements Comparable<Rider>{
     /**
      * @param skillLevel the skillLevel to set
      */
-    public void setSkillLevel(String skillLevel) {
+    public void setSkillLevel(int skillLevel) {
         this.skillLevel = skillLevel;
     }
 
     /**
      * @param type the type to set
      */
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 
     /**
      * @param favoriteHorses the favoriteHorses to set
      */
-    public void setFavoriteHorses(Horse[] favoriteHorses) {
+    public void setFavoriteHorses(Pair[] favoriteHorses) {
         this.favoriteHorses = favoriteHorses;
     }
 
     /**
      * @return the favoriteHorses
      */
-    public Horse[] getFavoriteHorses() {
+    public Pair[] getFavoriteHorses() {
         return favoriteHorses;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof Rider)) {
+            return false;
+        }
+
+        Rider r2 = (Rider) o;
+
+        if (this.name.equals(r2.getName()) && this.id == r2.getId() && this.type == r2.getType()
+                && this.skillLevel == r2.getSkillLevel() && this.height == r2.getHeight()) {
+            return true;
+        }
+
+        return false;
     }
 
     public String toString() {
         String horses = "";
         for (int i = 0; i < favoriteHorses.length; i++) {
             if (favoriteHorses[i] == null) {
-                horses += "NaN \n";
+                horses += "No horse \n";
             } else {
-                horses += favoriteHorses[i].getName() + "\n";
+                horses += favoriteHorses[i].getHorse().getName() + "\n";
             }
         }
-        return "RIDER INFO: \n" + this.id + ". " + "Name: " + this.name + "\n" + "Skill Level: " + this.skillLevel
-                + "\n" + "Height: " + this.height + " cm \n" + "Type: " + this.type + "\nTop 3 horses: \n" + horses;
+
+        return "RIDER INFO: \n" + this.id + ". " + "Name: " + this.name + "\n" + "Skill Level: "
+                + new SkillLevel().getSkillLevel(this.skillLevel) + "\n" + "Height: " + this.height + " cm \n"
+                + "Type: " + new Type().getType(this.type) + "\nTop 3 horses: \n" + horses;
     }
 
     @Override

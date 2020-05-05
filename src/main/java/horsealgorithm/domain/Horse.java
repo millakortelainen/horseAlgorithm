@@ -3,16 +3,24 @@ package horsealgorithm.domain;
 public class Horse implements Comparable<Horse> {
     private int id;
     private String name;
-    private String skillLevel;
+    private int skillLevel;
     private int height;
-    private String type;
+    private int type;
 
-    public Horse(int id, String name, String skillLevel, int height, String type) {
+    public Horse(int id, String name, int skillLevel, int height, int type) {
         this.id = id;
         this.name = name;
         this.skillLevel = skillLevel;
         this.height = height;
         this.type = type;
+    }
+
+    public Horse(int id) {
+        this.id = id;
+        this.name = "HorseName" + id;
+        this.skillLevel = 999;
+        this.height = 155;
+        this.type = 999;
     }
 
     /**
@@ -25,7 +33,7 @@ public class Horse implements Comparable<Horse> {
     /**
      * @param skillLevel the skillLevel to set
      */
-    public void setSkillLevel(String skillLevel) {
+    public void setSkillLevel(int skillLevel) {
         this.skillLevel = skillLevel;
     }
 
@@ -39,7 +47,7 @@ public class Horse implements Comparable<Horse> {
     /**
      * @param type the type to set
      */
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 
@@ -53,7 +61,7 @@ public class Horse implements Comparable<Horse> {
     /**
      * @return the skillLevel
      */
-    public String getSkillLevel() {
+    public int getSkillLevel() {
         return skillLevel;
     }
 
@@ -67,7 +75,7 @@ public class Horse implements Comparable<Horse> {
     /**
      * @return the type
      */
-    public String getType() {
+    public int getType() {
         return type;
     }
 
@@ -87,6 +95,9 @@ public class Horse implements Comparable<Horse> {
 
     @Override
     public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
         if (this == o) {
             return true;
         }
@@ -97,8 +108,8 @@ public class Horse implements Comparable<Horse> {
 
         Horse horse2 = (Horse) o;
 
-        if (this.name.equals(horse2.getName()) && this.id == horse2.getId() && this.type.equals(horse2.getType())
-                && this.skillLevel.equals(horse2.getSkillLevel()) && this.height == horse2.getHeight()) {
+        if (this.name.equals(horse2.getName()) && this.id == horse2.getId() && this.type == horse2.getType()
+                && this.skillLevel == horse2.getSkillLevel() && this.height == horse2.getHeight()) {
             return true;
         }
 
@@ -107,8 +118,10 @@ public class Horse implements Comparable<Horse> {
 
     @Override
     public String toString() {
-        return "HORSE INFO: \n" + this.id + ". " + "Name: " + this.name + "\n" + "Skill Level: " + this.skillLevel
-                + "\n" + "Height: " + this.height + " cm \n" + "Type: " + this.type;
+
+        return "HORSE INFO: \n" + this.id + ". " + "Name: " + this.name + "\n" + "Skill Level: "
+                + new SkillLevel().getSkillLevel(this.skillLevel) + "\n" + "Height: " + this.height + " cm \n"
+                + "Type: " + new Type().getType(this.type);
     }
 
     @Override

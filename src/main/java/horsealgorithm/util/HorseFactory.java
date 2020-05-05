@@ -1,6 +1,6 @@
 package horsealgorithm.util;
 
-import horsealgorithm.domain.Horse;
+import horsealgorithm.domain.*;
 import java.util.*;
 
 /**
@@ -14,10 +14,6 @@ public class HorseFactory {
             "Hemi", "Frankenstein", "Horsepower", "Moose", "Bing Bong", "Rainbow Unicorn", "Rusty Saddle",
             "Transmission", "Crouching Tiger", "Cowboy", "Jalopy", "Stable Boy", "Foxtrot" };
 
-    private String[] skillLevels = { "easy", "intermediate", "advanced" };
-
-    private String[] types = { "dressage", "show jumping", "kids", "cross country" };
-
     private int lastID = 0;
 
     /**
@@ -25,12 +21,12 @@ public class HorseFactory {
      * 
      * @return randomly generated horse
      */
-    public Horse makeHorse() {
+    public Horse makeHorse(Type t, SkillLevel sl) {
         Random r = new Random();
         String horseName = this.names[r.nextInt(this.names.length)];
-        String horseSkillLevel = this.skillLevels[r.nextInt(this.skillLevels.length)];
+        int horseSkillLevel = 1 + r.nextInt(sl.numberOfSkillLevels());
         int horseHeight = 100 + r.nextInt(96);
-        String horseType = this.types[r.nextInt(this.types.length)];
+        int horseType = 1 + r.nextInt(t.numberOfTypes());
         this.lastID++;
         return new Horse(lastID, horseName, horseSkillLevel, horseHeight, horseType);
     }
@@ -39,12 +35,12 @@ public class HorseFactory {
      * Creates as many horses as given as a parameter n.
      * 
      * @param n amount of created horses
-     * @return ArrayList of randomly generated horses.
+     * @return Array of randomly generated horses.
      */
-    public ArrayList<Horse> makeHorses(int n) {
-        ArrayList<Horse> horses = new ArrayList<>();
+    public Horse[] makeHorses(int n) {
+        Horse[] horses = new Horse[n];
         for (int i = 0; i < n; i++) {
-            horses.add(this.makeHorse());
+            horses[i] = makeHorse(new Type(), new SkillLevel());
         }
         return horses;
     }

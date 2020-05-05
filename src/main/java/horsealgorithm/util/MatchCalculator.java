@@ -9,54 +9,16 @@ import java.util.*;
  */
 public class MatchCalculator {
 
-    /**
-     * Calculates double value of how well rider and horse fit together. Value can
-     * be between 0.0 to 1.0.
-     * 
-     * @param horse horse to be paired
-     * @param rider rider to be paired
-     * @return score of horse and rider.
-     */
-    public double calculateCompatibility(Horse horse, Rider rider) {
-        double comp = 0;
-        if (Math.abs(horse.getHeight() - rider.getHeight()) > 20) {
-            return 0;
-        }
-        if (horse.getType().equals(rider.getType())) {
-            comp += 0.5;
-        }
-        comp += this.calculateSkillLevel(rider.getSkillLevel(), horse.getSkillLevel());
-        return comp;
+    FavoriteHorseHandler FHH;
+    ScoreCalculator SC;
+
+    public MatchCalculator(FavoriteHorseHandler FHH) {
+        this.FHH = FHH;
     }
 
-    /**
-     * Compares rider's skill level to horse's skill level. All riders get maximum
-     * points when the horses skill level is advanced. If horse's skill level is
-     * inermediate then advanced level riders get lower score. If horse's skill
-     * level is easy then advanced and intermediate level riders get lower score.
-     * The lower score means lower compatibility.
-     * 
-     * @param skillLevelRider Rider's skill level as a string
-     * @param skillLevelHorse Horse's skill level as a string
-     * @return score of how well the skill levels of rider and horse matches.
-     */
-    public double calculateSkillLevel(String skillLevelRider, String skillLevelHorse) {
-        if (skillLevelHorse.equalsIgnoreCase("easy")) {
-            if (skillLevelRider.equalsIgnoreCase("intemediate") || skillLevelRider.equalsIgnoreCase("advanced")) {
-                return 0.3;
-            }
-            return 0.5;
-        }
-        if (skillLevelHorse.equalsIgnoreCase("intermediate")) {
-            if (skillLevelRider.equalsIgnoreCase("advanced")) {
-                return 0.3;
-            }
-            return 0.5;
-        }
-        if (skillLevelHorse.equalsIgnoreCase("advanced")) {
-            return 0.5;
-        }
-        return 0.0;
+    public MatchCalculator() {
+        this.FHH = new FavoriteHorseHandler();
+        this.SC = new ScoreCalculator();
     }
 
     /**
@@ -65,64 +27,19 @@ public class MatchCalculator {
      * @param list all horse-rider pairs to be calculated.
      * @return HashMap where the key is compatibility score.
      */
-    public HashMap<Double, ArrayList<Pair>> calculateAllScores(ArrayList<Pair> list) {
+    public Pair[] calculateAllScores(Pair[] pairs) {
 
-        HashMap<Double, ArrayList<Pair>> scores = new HashMap<>();
-        for (Pair p : list) {
-            double score = this.calculateCompatibility(p.getHorse(), p.getRider());
-            setFavoritesToRiders(p.getRider(), p.getHorse(), score);
-            if (!scores.containsKey(score)) {
-                scores.put(score, new ArrayList<>());
-            }
-            scores.get(score).add(p);
+        for (Pair p : pairs) {
+            double score = SC.calculateCompatibility(p.getHorse(), p.getRider());
+            p.setScore(score);
+            FHH.setFavoritesToRider(p);
         }
-
-        return scores;
+        return pairs;
     }
 
-    /**
-     * Checks the riders favorite horses. If the score of the rider and horse is
-     * better than old favorite horse, then sets the horse as a new favorite horse.
-     * 
-     * @param r     rider
-     * @param h     horse
-     * @param score score of rider and horse
-     */
-    public void setFavoritesToRiders(Rider r, Horse h, double score) {
-        Horse[] favHorses = r.getFavoriteHorses();
-        boolean added = false;
-        for (int i = 0; i < r.getFavoriteHorses().length; i++) {
-            if (favHorses[i] == null) {
-                if (!added) {
-                    favHorses[i] = h;
-                    added = true;
-                }
-            } else if (this.calculateCompatibility(r.getFavoriteHorses()[i], r) < score) {
-                if (!added) {
-                    favHorses[i] = h;
-                    added = true;
-                }
-            }
-        }
-        r.setFavoriteHorses(favHorses);
+    public Pair[] GSAlgorithmForPairing(Horse[] horses, Rider[] riders) {
 
-    }
-
-    /**
-     * Method pairs horses and riders based on pair's score using Gale-Shapley
-     * algorithm.
-     * 
-     * @param horses List of horses
-     * @param riders List of riders
-     * @return List of horse-rider-pairs.
-     */
-    public ArrayList<Pair> GSAlgorithmForPairing(ArrayList<Horse> horses, ArrayList<Rider> riders) {
-
-        Collections.sort(riders);
-
-        Collections.sort(horses);
-
-        int[] horsesRider = new int[horses.size() + 1];
+        Pair[] horsesRider = new Pair[horses.length];
 
         ArrayDeque<Rider> freeRiders = new ArrayDeque<>();
 
@@ -132,99 +49,50 @@ public class MatchCalculator {
 
         while (!freeRiders.isEmpty()) {
             Rider r = freeRiders.poll();
-            boolean riderHasHorse = false;
             for (int i = 0; i < 3; i++) {
-                Horse ridersFavoriteHorse = r.getFavoriteHorses()[i];
-                if (ridersFavoriteHorse == null) {
+                Pair ridersFavorite = r.getFavoriteHorses()[i];
+                if (ridersFavorite == null) {
                     continue;
                 }
-                if (horsesRider[ridersFavoriteHorse.getId()] == 0) {
-                    horsesRider[ridersFavoriteHorse.getId()] = r.getId();
-                    riderHasHorse = true;
+                if (horseDoesNotHaveRider(horsesRider, ridersFavorite)) {
+                    horsesRider = setRiderToHorse(horsesRider, ridersFavorite);
                     break;
                 } else {
-                    int otherRidersId = horsesRider[ridersFavoriteHorse.getId()];
-                    Rider otherRider = riders.get(otherRidersId - 1);
-                    if (this.calculateCompatibility(ridersFavoriteHorse, r) > this
-                            .calculateCompatibility(ridersFavoriteHorse, otherRider)) {
-                        horsesRider[ridersFavoriteHorse.getId()] = r.getId();
-                        if (otherRider.getId() != r.getId()) {
-                            freeRiders.add(otherRider);
-                        }
-                        riderHasHorse = true;
-                        break;
-                    }
-                }
-
-            }
-            if (!riderHasHorse) {
-                for (int i = 1; i < horsesRider.length; i++) {
-                    if (horsesRider[i] == 0) {
-                        horsesRider[i] = r.getId();
+                    if (riderHasBetterScore(horsesRider, ridersFavorite)) {
+                        freeRiders.add(getHorsesCurrentRider(horsesRider, ridersFavorite));
+                        horsesRider = setRiderToHorse(horsesRider, ridersFavorite);
                         break;
                     }
                 }
             }
-
         }
-        ArrayList<Pair> ridersAndHorses = new ArrayList<>();
-        for (int i = 1; i < horsesRider.length; i++) {
-            if (horsesRider[i] == 0) {
-                continue;
-            }
-            int ridersId = horsesRider[i];
-
-            ridersAndHorses.add(new Pair(horses.get(i - 1), riders.get(ridersId - 1)));
-        }
-        return ridersAndHorses;
+        return horsesRider;
 
     }
 
-    public void pairingAlgo(ArrayList<Pair> pairs, ArrayList<Rider> riders) {
-        // talleta kaikki parhaat parit tähän listaan
-        ArrayList<Pair> bestPairs = new ArrayList<>();
-        // käy kaikki ratsastajat läpi
-        for (Rider r : riders) {
-            double bestScore = -1;
-            // katso mikä on ratsastajan paras tulos
-            for (Pair p : pairs) {
-                if (p.getScore() > bestScore && p.getRider().getId() == r.getId()) {
-                    bestScore = p.getScore();
-                }
-            }
-            // hae pari, ensimmäinen kelpaa
-            for (Pair p : pairs) {
-                if (p.getScore() == bestScore && p.getRider().getId() == r.getId()) {
-                    bestPairs.add(p);
-                    break;
-                }
-            }
-            // tarkista kellä on sama hevonen
-            ArrayList<Integer> horseIds = new ArrayList<>();
-            // parit jolla oli sama hevonen
-            ArrayDeque<Pair> samePairs = new ArrayDeque<>();
-            for (Pair p : bestPairs) {
-
-                if (horseIds.contains(p.getHorse().getId())) {
-                    //jos hevosen id oli jo olemassa niin pareja on useampi
-                    samePairs.add(p);
-                } else {
-                    //muutoin hevosen id lisätään listaan
-                    horseIds.add(p.getHorse().getId());
-                }
-            }
-            //seuraavaksi pitäisi määritellä miten saman hevosen omaava ihminen saa uuden hevosen
-        }
+    public int horseId(Pair p) {
+        return p.getHorse().getId();
     }
 
-    public ArrayDeque<Rider> makeQueueOfRiders(ArrayList<Rider> riders) {
-        ArrayDeque<Rider> freeRiders = new ArrayDeque<>();
+    public boolean horseDoesNotHaveRider(Pair[] horsesRider, Pair p) {
+        return horsesRider[horseId(p) - 1] == null;
+    }
 
-        for (Rider rider : riders) {
-            freeRiders.add(rider);
-        }
+    public Pair[] setRiderToHorse(Pair[] horsesRider, Pair p) {
+        horsesRider[horseId(p) - 1] = p;
+        return horsesRider;
+    }
 
-        return freeRiders;
+    public double horsesCurrentRidersScore(Pair[] horsesRider, Pair p) {
+        return horsesRider[horseId(p) - 1].getScore();
+    }
+
+    public boolean riderHasBetterScore(Pair[] horsesRider, Pair p) {
+        return horsesCurrentRidersScore(horsesRider, p) < p.getScore();
+    }
+
+    public Rider getHorsesCurrentRider(Pair[] horsesRider, Pair p) {
+        return horsesRider[p.getHorse().getId() - 1].getRider();
     }
 
 }

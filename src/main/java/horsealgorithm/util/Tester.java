@@ -1,15 +1,14 @@
 package horsealgorithm.util;
 
 import horsealgorithm.domain.*;
-import java.util.*;
 
 public class Tester {
     public void run() {
         int n = 50;
         MatchCalculator mc = new MatchCalculator();
         // first one is slow
-        ArrayList<Horse> horses = new HorseFactory().makeHorses(10);
-        ArrayList<Rider> riders = new RiderFactory().makeRiders(10);
+        Horse[] horses = new HorseFactory().makeHorses(10);
+        Rider[] riders = new RiderFactory().makeRiders(10);
         mc.GSAlgorithmForPairing(horses, riders);
         System.out.println("10 riders and horses");
         long sum = 0;
@@ -73,7 +72,7 @@ public class Tester {
         System.out.println("****");
         horses = new HorseFactory().makeHorses(1000);
         riders = new RiderFactory().makeRiders(1000);
-        ArrayList<Pair> pairs = new PairFactory().pairAll(horses, riders);
+        Pair[] pairs = new PairFactory().pairAll(horses, riders);
         for (int i = 0; i < n; i++) {
             long t = System.nanoTime();
             mc.calculateAllScores(pairs);
