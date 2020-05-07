@@ -1,7 +1,7 @@
 
 package horsealgorithm;
 
-import horsealgorithm.ui.*;
+import horsealgorithm.ui.UI;
 
 class Main {
     public static void main(String[] args) {

@@ -97,8 +97,11 @@ public class Horse {
 
         Horse horse2 = (Horse) o;
 
-        if (this.name.equals(horse2.getName()) && this.id == horse2.getId() && this.type.equals(horse2.getType())
-                && this.skillLevel.equals(horse2.getSkillLevel()) && this.height == horse2.getHeight()) {
+        if (this.name.equals(horse2.getName()) 
+            && this.id == horse2.getId() 
+            && this.type.equals(horse2.getType()) 
+            && this.skillLevel.equals(horse2.getSkillLevel()) 
+            && this.height == horse2.getHeight()) {
             return true;
         }
 
