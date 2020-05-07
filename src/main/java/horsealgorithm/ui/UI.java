@@ -1,9 +1,6 @@
 package horsealgorithm.ui;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
-import java.util.*;
 
 import horsealgorithm.util.*;
 import horsealgorithm.domain.*;
