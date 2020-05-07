@@ -10,7 +10,7 @@ import horsealgorithm.domain.*;
  */
 public class UI {
 
-    public void start() {
+    public void start(SkillLevel sl, Type t) {
 
         Scanner reader = new Scanner(System.in);
         System.out.println("Welcome!");
@@ -21,8 +21,8 @@ public class UI {
         System.out.println("How many riders there are?");
         int numberOfRiders = Integer.parseInt(reader.nextLine());
         System.out.println("*generating " + numberOfHorses + " horses and " + numberOfRiders + " riders*");
-        Horse[] horses = new HorseFactory().makeHorses(numberOfHorses);
-        Rider[] riders = new RiderFactory().makeRiders(numberOfRiders);
+        Horse[] horses = new HorseFactory().makeHorses(numberOfHorses, t, sl);
+        Rider[] riders = new RiderFactory().makeRiders(numberOfRiders, sl ,t);
         Pair[] pairs = new PairFactory().pairAll(horses, riders);
         while (true) {
             System.out.println("Press \n" + "1: show horses \n" + "2: show riders \n"
@@ -67,7 +67,7 @@ public class UI {
     }
 
     public void calculateBestPairs(Horse[] horses, Rider[] riders) {
-        Pair[] horsesRider = new MatchCalculator().GSAlgorithmForPairing(horses, riders);
+        Pair[] horsesRider = new MatchCalculator().gsAlgorithmForPairing(horses, riders);
         for (int i = 0; i < horsesRider.length; i++) {
             if(horsesRider[i] == null){
                 continue;

@@ -12,7 +12,7 @@ public class RiderTest {
 
     @Before
     public void setUp() {
-        rider = new Rider(1, "Name", 1, 155, 1);
+        rider = new Rider(1, "Name", new SkillLevel(1), 155, new Type(1));
     }
 
     @Test
@@ -26,12 +26,12 @@ public class RiderTest {
         assertEquals(2, rider.getId());
         rider.setName("newName");
         assertEquals("newName", rider.getName());
-        rider.setSkillLevel(2);
-        assertEquals(2, rider.getSkillLevel());
+        rider.setSkillLevel(new SkillLevel(2));
+        assertEquals(new SkillLevel(2), rider.getSkillLevel());
         rider.setHeight(123);
         assertEquals(123, rider.getHeight());
-        rider.setType(2);
-        assertEquals(2, rider.getType());
+        rider.setType(new Type(2));
+        assertEquals(new Type(2), rider.getType());
     }
 
     @Test

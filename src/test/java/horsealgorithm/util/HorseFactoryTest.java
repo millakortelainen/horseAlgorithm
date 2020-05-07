@@ -34,7 +34,7 @@ public class HorseFactoryTest {
     @Test
     public void manyHorsesAreCreated() {
         int n = 100;
-        Horse[] horses = hf.makeHorses(n);
+        Horse[] horses = hf.makeHorses(n, t, sl);
 
         boolean pass = true;
         for (int i = 0; i < n; i++) {
@@ -44,10 +44,10 @@ public class HorseFactoryTest {
             if (horses[i].getId() != i + 1) {
                 pass = false;
             }
-            if (horses[i].getSkillLevel() > sl.numberOfSkillLevels() || horses[i].getSkillLevel() < 1) {
+            if (horses[i].getSkillLevel().getSkillLevelNumber() > sl.numberOfSkillLevels() || horses[i].getSkillLevel().getSkillLevelNumber() < 1) {
                 pass = false;
             }
-            if (horses[i].getType() > t.numberOfTypes() || horses[i].getType() < 1) {
+            if (horses[i].getType().getNumberOfType() > t.numberOfTypes() || horses[i].getType().getNumberOfType() < 1) {
                 pass = false;
             }
         }

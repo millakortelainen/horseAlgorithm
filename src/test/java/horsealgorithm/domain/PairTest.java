@@ -25,13 +25,4 @@ public class PairTest {
         assertEquals(r2, pair.getRider());
     }
 
-    @Test
-    public void testCompareTo() {
-        Pair p2 = new Pair(new Horse(1), new Rider(1));
-        assertEquals(p2.compareTo(pair), 1);
-        Pair p3 = new Pair(new Horse(4), new Rider(1));
-
-        assertEquals(p3.compareTo(pair), 0);
-    }
-
 }

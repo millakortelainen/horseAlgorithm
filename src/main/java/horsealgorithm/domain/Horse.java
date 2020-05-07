@@ -20,32 +20,6 @@ public class Horse extends Node {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (o == null) {
-            return false;
-        }
-        if (this == o) {
-            return true;
-        }
-
-        if (!(o instanceof Horse)) {
-            return false;
-        }
-
-        Horse horse2 = (Horse) o;
-
-        if (super.getName().equals(horse2.getName()) 
-                && super.getId() == horse2.getId() 
-                && super.getType().equals(horse2.getType())
-                && super.getSkillLevel() == horse2.getSkillLevel() 
-                && super.getHeight() == horse2.getHeight()) {
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
     public String toString() {
 
         return "HORSE INFO: \n" 

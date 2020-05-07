@@ -1,6 +1,7 @@
 package horsealgorithm.domain;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
@@ -32,6 +33,13 @@ public class TypeTest {
         assertEquals("show jumping", t.getType(2));
         assertEquals("kids", t.getType(3));
         assertEquals("cross country", t.getType(4));
+    }
+
+    @Test
+    public void typeEqualsTest(){
+        assertEquals(t, new Type());
+        assertEquals(new Type(1), new Type(1));
+        assertNotEquals(new Type(1), new Type(2));
     }
 
 }

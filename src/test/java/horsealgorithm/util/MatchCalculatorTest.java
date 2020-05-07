@@ -9,16 +9,20 @@ import horsealgorithm.domain.*;
 
 public class MatchCalculatorTest {
     MatchCalculator m;
+    SkillLevel sl;
+    Type t;
 
     @Before
     public void setUp() {
         m = new MatchCalculator();
+        sl = new SkillLevel();
+        t = new Type();
     }
 
     @Test
     public void calculateAllScoresTest() {
-        Horse[] horses = new HorseFactory().makeHorses(3);
-        Rider[] riders = new RiderFactory().makeRiders(3);
+        Horse[] horses = new HorseFactory().makeHorses(3, t, sl);
+        Rider[] riders = new RiderFactory().makeRiders(3, sl, t);
         Pair[] pairs = new PairFactory().pairAll(horses, riders);
         Pair[] pairsWithScores = m.calculateAllScores(pairs);
         boolean pass = true;
@@ -78,7 +82,7 @@ public class MatchCalculatorTest {
         Horse[] horses = { new Horse(1), new Horse(2), new Horse(3) };
         Pair[] pairs = new PairFactory().pairAll(horses, riders);
         m.calculateAllScores(pairs);
-        Pair[] all = m.GSAlgorithmForPairing(horses, riders);
+        Pair[] all = m.gsAlgorithmForPairing(horses, riders);
         assertEquals(3, all.length);
 
         boolean pass = true;
@@ -96,7 +100,7 @@ public class MatchCalculatorTest {
         Horse[] horses = { new Horse(1), new Horse(2), new Horse(3), new Horse(4) };
         Pair[] pairs = new PairFactory().pairAll(horses, riders);
         m.calculateAllScores(pairs);
-        Pair[] all = m.GSAlgorithmForPairing(horses, riders);
+        Pair[] all = m.gsAlgorithmForPairing(horses, riders);
         assertEquals(4, all.length);
 
         int nulls = 0;
@@ -117,24 +121,24 @@ public class MatchCalculatorTest {
         Horse h2 = new Horse(2);
         Horse h3 = new Horse(3);
 
-        r1.setSkillLevel(1);
-        h3.setSkillLevel(1);
-        r1.setType(4);
-        h3.setType(4);
+        r1.setSkillLevel(new SkillLevel(1));
+        h3.setSkillLevel(new SkillLevel(1));
+        r1.setType(new Type(4));
+        h3.setType(new Type(4));
         r1.setHeight(190);
         h3.setHeight(190);
 
-        r3.setSkillLevel(5);
-        h2.setSkillLevel(5);
-        r3.setType(2);
-        h2.setType(2);
+        r3.setSkillLevel(new SkillLevel(5));
+        h2.setSkillLevel(new SkillLevel(5));
+        r3.setType(new Type(2));
+        h2.setType(new Type(2));
         r3.setHeight(120);
         h2.setHeight(120);
 
-        r2.setSkillLevel(2);
-        h1.setSkillLevel(2);
-        r2.setType(5);
-        h1.setType(5);
+        r2.setSkillLevel(new SkillLevel(2));
+        h1.setSkillLevel(new SkillLevel(2));
+        r2.setType(new Type(5));
+        h1.setType(new Type(5));
         r2.setHeight(100);
         h1.setHeight(100);
 
@@ -142,7 +146,7 @@ public class MatchCalculatorTest {
         Horse[] horses = { h1, h2, h3 };
         Pair[] pairs = new PairFactory().pairAll(horses, riders);
         m.calculateAllScores(pairs);
-        Pair[] all = m.GSAlgorithmForPairing(horses, riders);
+        Pair[] all = m.gsAlgorithmForPairing(horses, riders);
         assertEquals(3, all.length);
 
         assertEquals(r2, all[0].getRider());

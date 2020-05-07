@@ -10,7 +10,7 @@ public class HorseTest {
 
     @Before
     public void setUp() {
-        horse = new Horse(1, "TestHorse", 1, 177, 1);
+        horse = new Horse(1, "TestHorse", new SkillLevel(1), 177, new Type(1));
         horse2 = new Horse(1);
     }
 
@@ -27,19 +27,29 @@ public class HorseTest {
         assertEquals(2, horse.getId());
         horse.setName("NewTest");
         assertEquals("NewTest", horse.getName());
-        horse.setSkillLevel(2);
-        assertEquals(2, horse.getSkillLevel());
+        horse.setSkillLevel(new SkillLevel(2));
+        assertEquals(new SkillLevel(2), horse.getSkillLevel());
         horse.setHeight(130);
         assertEquals(130, horse.getHeight());
-        horse.setType(2);
-        assertEquals(2, horse.getType());
+        horse.setType(new Type(2));
+        assertEquals(new Type(2), horse.getType());
     }
 
     @Test
-    public void testHorseEquals() {
+    public void testHorseEquals1() {
         assertTrue(horse.equals(horse));
-        assertFalse(horse.equals(new Horse(2, "tester", 1, 123, 1)));
-        assertTrue(horse.equals(new Horse(1, "TestHorse", 1, 177, 1)));
+    }
+
+    @Test
+    public void testHorseEquals2() {
+        assertFalse(horse.equals(new Horse(2, "tester", new SkillLevel(1), 123, new Type(1))));
+    }
+
+    @Test
+    public void testHorseEquals3() {
+        System.out.println(horse);
+        System.out.println(new Horse(1, "TestHorse", new SkillLevel(1), 177, new Type(1)));
+        assertTrue(horse.equals(new Horse(1, "TestHorse", new SkillLevel(1), 177, new Type(1))));
     }
 
     @Test

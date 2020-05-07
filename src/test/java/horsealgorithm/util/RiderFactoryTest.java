@@ -34,25 +34,67 @@ public class RiderFactoryTest {
     @Test
     public void manyRidersAreCreated() {
         int n = 100;
-        Rider[] riders = rf.makeRiders(n);
+        Rider[] riders = rf.makeRiders(n, sl, t);
 
         boolean pass = true;
         for (int i = 0; i < n; i++) {
             if (riders[i] == null) {
                 pass = false;
             }
+        }
+        assertTrue(pass);
+        assertEquals(n, riders.length);
+    }
+
+    @Test
+    public void manyRidersAreCreated2() {
+        int n = 100;
+        Rider[] riders = rf.makeRiders(n, sl, t);
+
+        boolean pass = true;
+        for (int i = 0; i < n; i++) {
+
             if (riders[i].getId() != i + 1) {
                 pass = false;
             }
-            if (riders[i].getSkillLevel() > sl.numberOfSkillLevels() || riders[i].getSkillLevel() < 1) {
-                pass = false;
-            }
-            if (riders[i].getType() > t.numberOfTypes() || riders[i].getType() < 1) {
+
+        }
+        assertTrue(pass);
+        assertEquals(n, riders.length);
+    }
+
+    @Test
+    public void manyRidersAreCreated3() {
+        int n = 100;
+        Rider[] riders = rf.makeRiders(n, sl, t);
+
+        boolean pass = true;
+        for (int i = 0; i < n; i++) {
+
+            if (riders[i].getSkillLevel().getSkillLevelNumber() > sl.numberOfSkillLevels()
+                    || riders[i].getSkillLevel().getSkillLevelNumber() < 1) {
                 pass = false;
             }
         }
         assertTrue(pass);
-        assertSame(n, riders.length);
+        assertEquals(n, riders.length);
+    }
+
+    @Test
+    public void manyRidersAreCreated4() {
+        int n = 100;
+        Rider[] riders = rf.makeRiders(n, sl, t);
+
+        boolean pass = true;
+        for (int i = 0; i < n; i++) {
+
+            if (riders[i].getType().getNumberOfType() > t.numberOfTypes()
+                    || riders[i].getType().getNumberOfType() < 1) {
+                pass = false;
+            }
+        }
+        assertTrue(pass);
+        assertEquals(n, riders.length);
     }
 
 }

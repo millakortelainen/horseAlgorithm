@@ -1,11 +1,16 @@
 package horsealgorithm.domain;
 
-public class Rider extends Node{
+public class Rider extends Node {
     private Pair[] favoriteHorses;
 
     /**
-     * Constructor for rider.
+     * Constructor for rider with all parameters
      * 
+     * @param id
+     * @param name
+     * @param skillLevel
+     * @param height
+     * @param type
      */
     public Rider(int id, String name, SkillLevel skillLevel, int height, Type type) {
         super(id, name, skillLevel, height, type);
@@ -13,7 +18,9 @@ public class Rider extends Node{
     }
 
     /**
-     * Constructor for rider with automated values for testing.
+     * Constructor for rider with automated parameters for testing
+     * 
+     * @param id
      */
     public Rider(int id) {
         super(id, "RiderName" + id, new SkillLevel(999), 123, new Type(999));
@@ -46,12 +53,12 @@ public class Rider extends Node{
             }
         }
 
-        return "RIDER INFO: \n" 
-                + this.id + ". " + "Name: " + this.name + "\n" 
-                + "Skill Level: " + skillLevel + "\n" 
-                + "Height: " + this.height + " cm \n"
-                + "Type: " + super.getType() + "\nTop 3 horses: \n" 
-                + horses;
+        return "RIDER INFO: \n"
+                + super.getId() + ". " + "Name: " + super.getName() + "\n"
+                + "Skill Level: " + super.getSkillLevel() + "\n"
+                + "Height: " + super.getHeight() + " cm \n"
+                + "Type: " + super.getType() + "\n"
+                + "Top 3 horses: \n" + horses;
     }
 
 }

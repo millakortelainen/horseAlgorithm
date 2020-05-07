@@ -1,7 +1,8 @@
 package horsealgorithm.util;
 
-import java.util.*;
-import horsealgorithm.domain.*;
+import horsealgorithm.domain.Horse;
+import horsealgorithm.domain.Pair;
+import horsealgorithm.domain.Rider;
 
 /**
  * Pairs up horses and riders;

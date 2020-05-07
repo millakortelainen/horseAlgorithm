@@ -1,6 +1,7 @@
 package horsealgorithm.domain;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
@@ -31,5 +32,12 @@ public class SkillLevelTest {
         assertEquals("easy", sl.getSkillLevel(1));
         assertEquals("intermediate", sl.getSkillLevel(2));
         assertEquals("advanced", sl.getSkillLevel(3));
+    }
+
+    @Test
+    public void skillLevelEqualsTeset(){
+        assertEquals(new SkillLevel(), sl);
+        assertEquals(new SkillLevel(1), new SkillLevel(1));
+        assertNotEquals(new SkillLevel(1), new SkillLevel(3));
     }
 }
