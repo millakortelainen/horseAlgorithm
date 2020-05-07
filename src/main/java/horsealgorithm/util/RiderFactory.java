@@ -1,6 +1,7 @@
 package horsealgorithm.util;
 
-import horsealgorithm.domain.Rider;
+import horsealgorithm.domain.*;
+
 import java.util.*;
 
 /**
@@ -15,26 +16,22 @@ public class RiderFactory {
             "Louis McCoy", "Vincent Keller", "Lester Hamilton", "Micheal Jacobson", "Jay Norton", "Angel Galloway",
             "Bryce Hyde" };
 
-    private String[] skillLevels = { "easy", "intermediate", "advanced" };
-
-    private String[] types = { "dressage", "show jumping", "kids", "cross country" };
-
     private int lastID = 0;
 
-    public Rider makeRider() {
+    public Rider makeRider(SkillLevel sl, Type t) {
         Random r = new Random();
         String riderName = this.names[r.nextInt(this.names.length)];
-        String riderSkillLevel = this.skillLevels[r.nextInt(this.skillLevels.length)];
+        int riderSkillLevel = 1 + r.nextInt(sl.numberOfSkillLevels());
         int riderHeight = 100 + r.nextInt(96);
-        String riderType = this.types[r.nextInt(this.types.length)];
+        int riderType = 1 + r.nextInt(t.numberOfTypes());
         this.lastID++;
         return new Rider(lastID, riderName, riderSkillLevel, riderHeight, riderType);
     }
 
-    public ArrayList<Rider> makeRiders(int n) {
-        ArrayList<Rider> riders = new ArrayList<>();
+    public Rider[] makeRiders(int n) {
+        Rider[] riders = new Rider[n];
         for (int i = 0; i < n; i++) {
-            riders.add(this.makeRider());
+            riders[i] = makeRider(new SkillLevel(), new Type());
         }
         return riders;
     }

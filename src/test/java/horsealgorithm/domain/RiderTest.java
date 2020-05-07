@@ -12,7 +12,7 @@ public class RiderTest {
 
     @Before
     public void setUp() {
-        rider = new Rider(1, "Name", "SkillLevel", 155, "Type");
+        rider = new Rider(1, "Name", 1, 155, 1);
     }
 
     @Test
@@ -26,55 +26,31 @@ public class RiderTest {
         assertEquals(2, rider.getId());
         rider.setName("newName");
         assertEquals("newName", rider.getName());
-        rider.setSkillLevel("newSkillLevel");
-        assertEquals("newSkillLevel", rider.getSkillLevel());
+        rider.setSkillLevel(2);
+        assertEquals(2, rider.getSkillLevel());
         rider.setHeight(123);
         assertEquals(123, rider.getHeight());
-        rider.setType("newType");
-        assertEquals("newType", rider.getType());
+        rider.setType(2);
+        assertEquals(2, rider.getType());
     }
 
     @Test
     public void ridersFavoriteHorsesisEmptyFirst() {
-        Horse[] horses = new Horse[3];
-        assertArrayEquals(horses, rider.getFavoriteHorses());
+        Pair[] pairs = new Pair[3];
+        assertArrayEquals(pairs, rider.getFavoriteHorses());
     }
 
     @Test
-    public void ridersFavoriteHorses() {
-        Horse h1 = new Horse(1, "name", "skillLevel", 133, "type");
-        Horse h2 = new Horse(2, "name", "skillLevel", 111, "type");
-        Horse h3 = new Horse(3, "name", "skillLevel", 199, "type");
-        Horse[] horses = { h1, h2, h3 };
-        rider.setFavoriteHorses(horses);
-        assertArrayEquals(horses, rider.getFavoriteHorses());
-    }
-
-    @Test
-    public void riderToString(){
-        assertEquals("RIDER INFO: \n"+ 
-        "1. Name: Name\n"+
-        "Skill Level: SkillLevel\n"+
-        "Height: 155 cm \n" +
-        "Type: Type\n"+
-        "Top 3 horses: \n"+ 
-        "NaN \n" +
-        "NaN \n" +
-        "NaN \n" , rider.toString());
-        Horse h1 = new Horse(1, "name", "skillLevel", 133, "type");
-        Horse h2 = new Horse(2, "name", "skillLevel", 111, "type");
-        Horse h3 = new Horse(3, "name", "skillLevel", 199, "type");
-        Horse[] horses = { h1, h2, h3 };
-        rider.setFavoriteHorses(horses);
-        assertEquals("RIDER INFO: \n"+ 
-        "1. Name: Name\n"+
-        "Skill Level: SkillLevel\n"+
-        "Height: 155 cm \n" +
-        "Type: Type\n"+
-        "Top 3 horses: \n"+ 
-        "name\n" +
-        "name\n" +
-        "name\n" , rider.toString());
+    public void riderToString() {
+        assertEquals("RIDER INFO: \n" + "1. Name: Name\n" + "Skill Level: easy\n" + "Height: 155 cm \n"
+                + "Type: dressage\n" + "Top 3 horses: \n" + "No horse \n" + "No horse \n" + "No horse \n", rider.toString());
+        Horse h1 = new Horse(1);
+        Horse h2 = new Horse(2);
+        Horse h3 = new Horse(3);
+        Pair[] favPairs = { new Pair(h1, rider), new Pair(h2, rider), new Pair(h3, rider)};
+        rider.setFavoriteHorses(favPairs);
+        assertEquals("RIDER INFO: \n" + "1. Name: Name\n" + "Skill Level: easy\n" + "Height: 155 cm \n"
+                + "Type: dressage\n" + "Top 3 horses: \n" + "HorseName1\n" + "HorseName2\n" + "HorseName3\n", rider.toString());
 
     }
 

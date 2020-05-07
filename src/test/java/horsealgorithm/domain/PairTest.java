@@ -11,28 +11,25 @@ public class PairTest {
 
     @Before
     public void setUp() {
-        pair = new Pair(new Horse(1, "name", "skillLevel", 122, "type"),
-                new Rider(1, "name", "skillLevel", 133, "type"));
+        pair = new Pair(new Horse(1), new Rider(1));
     }
 
     @Test
     public void testSetterAndGetters() {
-        Horse h2 = new Horse(2, "name", "skillLevel", 123, "type");
+        Horse h2 = new Horse(2);
         pair.setHorse(h2);
         assertEquals(h2, pair.getHorse());
 
-        Rider r2 = new Rider(2, "name", "skillLevel", 123, "type");
+        Rider r2 = new Rider(2);
         pair.setRider(r2);
         assertEquals(r2, pair.getRider());
     }
 
     @Test
     public void testCompareTo() {
-        Pair p2 = new Pair(new Horse(1, "name", "skillLevel", 122, "type"),
-                new Rider(1, "name", "skillLevel", 133, "type"));
+        Pair p2 = new Pair(new Horse(1), new Rider(1));
         assertEquals(p2.compareTo(pair), 1);
-        Pair p3 = new Pair(new Horse(4, "name", "skillLevel", 122, "type"),
-                new Rider(1, "name", "skillLevel", 133, "type"));
+        Pair p3 = new Pair(new Horse(4), new Rider(1));
 
         assertEquals(p3.compareTo(pair), 0);
     }

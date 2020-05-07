@@ -1,92 +1,29 @@
 package horsealgorithm.domain;
 
-public class Horse {
-    private int id;
-    private String name;
-    private String skillLevel;
-    private int height;
-    private String type;
+public class Horse extends Node {
 
-    public Horse(int id, String name, String skillLevel, int height, String type) {
-        this.id = id;
-        this.name = name;
-        this.skillLevel = skillLevel;
-        this.height = height;
-        this.type = type;
+
+    /**
+     * Constructor for horse with all parameters
+     */
+    public Horse(int id, String name, SkillLevel skillLevel, int height, Type type) {
+        super(id, name, skillLevel, height, type);
     }
 
     /**
-     * @param name the name to set
+     * Constructor for horse with parameter id,
+     * all other parameters are generated. 
+     * For testing purposes.
      */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * @param skillLevel the skillLevel to set
-     */
-    public void setSkillLevel(String skillLevel) {
-        this.skillLevel = skillLevel;
-    }
-
-    /**
-     * @param height the height to set
-     */
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    /**
-     * @param type the type to set
-     */
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @return the skillLevel
-     */
-    public String getSkillLevel() {
-        return skillLevel;
-    }
-
-    /**
-     * @return the height
-     */
-    public int getHeight() {
-        return height;
-    }
-
-    /**
-     * @return the type
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
+    public Horse(int id) {
+        super(id, "HorseName" + id, new SkillLevel(999), 155, new Type(999));
     }
 
     @Override
     public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
         if (this == o) {
             return true;
         }
@@ -97,11 +34,11 @@ public class Horse {
 
         Horse horse2 = (Horse) o;
 
-        if (this.name.equals(horse2.getName()) 
-            && this.id == horse2.getId() 
-            && this.type.equals(horse2.getType()) 
-            && this.skillLevel.equals(horse2.getSkillLevel()) 
-            && this.height == horse2.getHeight()) {
+        if (super.getName().equals(horse2.getName()) 
+                && super.getId() == horse2.getId() 
+                && super.getType().equals(horse2.getType())
+                && super.getSkillLevel() == horse2.getSkillLevel() 
+                && super.getHeight() == horse2.getHeight()) {
             return true;
         }
 
@@ -110,8 +47,11 @@ public class Horse {
 
     @Override
     public String toString() {
-        return "HORSE INFO: \n" + this.id + ". " + "Name: " + this.name + "\n" + "Skill Level: " + this.skillLevel
-                + "\n" + "Height: " + this.height + " cm \n" + "Type: " + this.type;
-    }
 
+        return "HORSE INFO: \n" 
+                + super.getId() + ". " + "Name: " + super.getName() + "\n"
+                + "Skill Level: " + super.getSkillLevel() + "\n" 
+                + "Height: " + super.getHeight() + " cm \n"
+                + "Type: " + super.getType();
+    }
 }

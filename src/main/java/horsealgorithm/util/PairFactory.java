@@ -15,14 +15,20 @@ public class PairFactory {
      * @param riders riders to be paired
      * @return ArrayList of horse-rider pairs.
      */
-    public ArrayList<Pair> pairAll(ArrayList<Horse> horses, ArrayList<Rider> riders) {
-        ArrayList<Pair> pairs = new ArrayList<>();
+    public Pair[] pairAll(Horse[] horses, Rider[] riders) {
+        Pair[] pairs = new Pair[amountOfPairs(horses.length, riders.length)];
+        int i = 0;
         for (Horse h : horses) {
             for (Rider r : riders) {
-                Pair p = new Pair(h, r);
-                pairs.add(p);
+                pairs[i] = new Pair(h, r);
+                i++;
             }
         }
         return pairs;
     }
+
+    private int amountOfPairs(int n, int m) {
+        return n * m;
+    }
+
 }

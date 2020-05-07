@@ -3,151 +3,151 @@ package horsealgorithm.util;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 import org.junit.Before;
 
-import horsealgorithm.domain.Horse;
-import horsealgorithm.domain.Pair;
-import horsealgorithm.domain.Rider;
+import horsealgorithm.domain.*;
 
 public class MatchCalculatorTest {
-    Horse horse;
-    Rider rider;
     MatchCalculator m;
 
     @Before
     public void setUp() {
-        horse = new Horse(1, "TestHorse", "advanced", 177, "dressage");
-        rider = new Rider(1, "TestName", "advanced", 170, "dressage");
         m = new MatchCalculator();
     }
 
     @Test
-    public void TestPerfectMatchingScore() {
-        double d = m.calculateCompatibility(horse, rider);
-        assertEquals(1.0, d, 0.0001);
+    public void calculateAllScoresTest() {
+        Horse[] horses = new HorseFactory().makeHorses(3);
+        Rider[] riders = new RiderFactory().makeRiders(3);
+        Pair[] pairs = new PairFactory().pairAll(horses, riders);
+        Pair[] pairsWithScores = m.calculateAllScores(pairs);
+        boolean pass = true;
+        for (Pair p : pairsWithScores) {
+            if (p.getScore() < 0.0) {
+                pass = false;
+            }
+        }
+        assertTrue(pass);
     }
 
     @Test
-    public void TestPerfectMatchingScore2() {
-        horse.setHeight(170);
-        rider.setHeight(190);
-        double d = m.calculateCompatibility(horse, rider);
-        assertEquals(1.0, d, 0.0001);
+    public void horseDoesNotHavePairTest() {
+        Pair[] horsesRider = { null, null, new Pair(new Horse(3), new Rider(1)) };
+        assertTrue(m.horseDoesNotHaveRider(horsesRider, new Pair(new Horse(1), new Rider(1))));
+        assertFalse(m.horseDoesNotHaveRider(horsesRider, new Pair(new Horse(3), new Rider(1))));
     }
 
     @Test
-    public void TestMediumMatchingScore() {
-        horse.setSkillLevel("easy");
-        double d = m.calculateCompatibility(horse, rider);
-        assertEquals(0.8, d, 0.0001);
+    public void setRiderToHorse() {
+        Pair[] horsesRider = { null, null, new Pair(new Horse(3), new Rider(1)) };
+        Pair p = new Pair(new Horse(1), new Rider(2));
+        horsesRider = m.setRiderToHorse(horsesRider, p);
+        assertNotNull(horsesRider[0]);
+        assertNull(horsesRider[1]);
+        assertNotNull(horsesRider[2]);
     }
 
     @Test
-    public void TestMediumMatchingScore2() {
-        rider.setType("differentType");
-        double d = m.calculateCompatibility(horse, rider);
-        assertEquals(0.5, d, 0.0001);
+    public void horsesCurrentRidersScoreTest() {
+        Pair[] horsesRider = { null, null, new Pair(new Horse(3), new Rider(1), 0.6) };
+        Pair p = new Pair(new Horse(3), new Rider(2));
+        assertEquals(0.6, m.horsesCurrentRidersScore(horsesRider, p), 0.000001);
     }
 
     @Test
-    public void TestBadMatchingScore() {
-        horse.setHeight(140);
-        double d = m.calculateCompatibility(horse, rider);
-        assertEquals(0.0, d, 0.0001);
+    public void riderHasBetterScoreTest() {
+        Pair[] horsesRider = { null, null, new Pair(new Horse(3), new Rider(1), 0.6) };
+        Pair p = new Pair(new Horse(3), new Rider(2), 0.8);
+        assertTrue(m.riderHasBetterScore(horsesRider, p));
+
+        p.setScore(0.4);
+        assertFalse(m.riderHasBetterScore(horsesRider, p));
     }
 
     @Test
-    public void TestBadMatchingScore2() {
-        rider.setSkillLevel("easy");
-        rider.setType("alsoDifferent");
-        double d = m.calculateCompatibility(horse, rider);
-        assertEquals(0.5, d, 0.0001);
+    public void getHorsesCurrentRiderTest() {
+        Pair[] horsesRider = { null, null, new Pair(new Horse(3), new Rider(1), 0.6) };
+        Pair p = new Pair(new Horse(3), new Rider(2), 0.8);
+        Rider r = m.getHorsesCurrentRider(horsesRider, p);
+        assertEquals(new Rider(1).getId(), r.getId());
     }
 
     @Test
-    public void GSAlgorithmTestAllHorsesGetRider() {
-        Horse h1 = new Horse(1, "name", "skillLevel", 155, "type");
-        Horse h2 = new Horse(2, "name", "skillLevel", 155, "type");
-        Horse h3 = new Horse(3, "name", "skillLevel", 155, "type");
-        Rider r1 = new Rider(1, "name", "skillLevel", 155, "type");
-        Rider r2 = new Rider(2, "name", "skillLevel", 155, "type");
-        Rider r3 = new Rider(3, "name", "skillLevel", 155, "type");
+    public void GSAtest1() {
+        Rider[] riders = { new Rider(1), new Rider(2), new Rider(3) };
+        Horse[] horses = { new Horse(1), new Horse(2), new Horse(3) };
+        Pair[] pairs = new PairFactory().pairAll(horses, riders);
+        m.calculateAllScores(pairs);
+        Pair[] all = m.GSAlgorithmForPairing(horses, riders);
+        assertEquals(3, all.length);
 
-        ArrayList<Horse> horses = new ArrayList<>();
-        ArrayList<Rider> riders = new ArrayList<>();
-
-        horses.add(h1);
-        horses.add(h2);
-        horses.add(h3);
-
-        riders.add(r1);
-        riders.add(r2);
-        riders.add(r3);
-        ArrayList<Pair> list = new PairFactory().pairAll(horses, riders);
-        m.calculateAllScores(list);
-        ArrayList<Pair> pairs = m.GSAlgorithmForPairing(horses, riders);
-
-        assertEquals(3, pairs.size());
+        boolean pass = true;
+        for (Pair p : all) {
+            if (p == null) {
+                pass = false;
+            }
+        }
+        assertTrue(pass);
     }
 
     @Test
-    public void GSAlgorithmTestSomeHorses() {
-        Horse h1 = new Horse(1, "name", "skillLevel", 155, "type");
-        Horse h2 = new Horse(2, "name", "skillLevel", 155, "type");
-        Horse h3 = new Horse(3, "name", "skillLevel", 155, "type");
-        Horse h4 = new Horse(4, "name", "skillLevel", 155, "type");
-        Rider r1 = new Rider(1, "name", "skillLevel", 155, "type");
-        Rider r2 = new Rider(2, "name", "skillLevel", 155, "type");
-        Rider r3 = new Rider(3, "name", "skillLevel", 155, "type");
+    public void GSAtest2() {
+        Rider[] riders = { new Rider(1), new Rider(2), new Rider(3) };
+        Horse[] horses = { new Horse(1), new Horse(2), new Horse(3), new Horse(4) };
+        Pair[] pairs = new PairFactory().pairAll(horses, riders);
+        m.calculateAllScores(pairs);
+        Pair[] all = m.GSAlgorithmForPairing(horses, riders);
+        assertEquals(4, all.length);
 
-        ArrayList<Horse> horses = new ArrayList<>();
-        ArrayList<Rider> riders = new ArrayList<>();
-
-        horses.add(h1);
-        horses.add(h2);
-        horses.add(h3);
-        horses.add(h4);
-
-        riders.add(r1);
-        riders.add(r2);
-        riders.add(r3);
-        ArrayList<Pair> list = new PairFactory().pairAll(horses, riders);
-        m.calculateAllScores(list);
-        ArrayList<Pair> pairs = m.GSAlgorithmForPairing(horses, riders);
-
-        assertEquals(3, pairs.size());
+        int nulls = 0;
+        for (Pair p : all) {
+            if (p == null) {
+                nulls++;
+            }
+        }
+        assertEquals(1, nulls);
     }
+
     @Test
-    public void GSAlgorithmTestScoresVary() {
-        Horse h1 = new Horse(1, "name", "skillLevel", 133, "type");
-        Horse h2 = new Horse(2, "name", "skillLevel", 120, "type");
-        Horse h3 = new Horse(3, "name", "skillLevel", 180, "type");
-        Rider r1 = new Rider(1, "name", "skillLevel", 100, "type");
-        Rider r2 = new Rider(2, "name", "skillLevel", 200, "type");
-        Rider r3 = new Rider(3, "name", "skillLevel", 180, "type");
+    public void GSAtest3() {
+        Rider r1 = new Rider(1);
+        Rider r2 = new Rider(2);
+        Rider r3 = new Rider(3);
+        Horse h1 = new Horse(1);
+        Horse h2 = new Horse(2);
+        Horse h3 = new Horse(3);
 
-        ArrayList<Horse> horses = new ArrayList<>();
-        ArrayList<Rider> riders = new ArrayList<>();
+        r1.setSkillLevel(1);
+        h3.setSkillLevel(1);
+        r1.setType(4);
+        h3.setType(4);
+        r1.setHeight(190);
+        h3.setHeight(190);
 
-        horses.add(h1);
-        horses.add(h2);
-        horses.add(h3);
+        r3.setSkillLevel(5);
+        h2.setSkillLevel(5);
+        r3.setType(2);
+        h2.setType(2);
+        r3.setHeight(120);
+        h2.setHeight(120);
 
-        riders.add(r1);
-        riders.add(r2);
-        riders.add(r3);
-        ArrayList<Pair> list = new PairFactory().pairAll(horses, riders);
-        m.calculateAllScores(list);
-        ArrayList<Pair> pairs = m.GSAlgorithmForPairing(horses, riders);
+        r2.setSkillLevel(2);
+        h1.setSkillLevel(2);
+        r2.setType(5);
+        h1.setType(5);
+        r2.setHeight(100);
+        h1.setHeight(100);
 
-        assertEquals(3, pairs.size());
+        Rider[] riders = { r1, r2, r3 };
+        Horse[] horses = { h1, h2, h3 };
+        Pair[] pairs = new PairFactory().pairAll(horses, riders);
+        m.calculateAllScores(pairs);
+        Pair[] all = m.GSAlgorithmForPairing(horses, riders);
+        assertEquals(3, all.length);
+
+        assertEquals(r2, all[0].getRider());
+        assertEquals(r3, all[1].getRider());
+        assertEquals(r1, all[2].getRider());
     }
-
-    
-
-
 
 }

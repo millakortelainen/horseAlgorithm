@@ -1,117 +1,57 @@
 package horsealgorithm.domain;
 
-public class Rider {
-    private int id;
-    private String name;
-    private String skillLevel;
-    private int height;
-    private String type;
-    private Horse[] favoriteHorses;
+public class Rider extends Node{
+    private Pair[] favoriteHorses;
 
-    public Rider(int id, String name, String skillLevel, int height, String type) {
-        this.id = id;
-        this.name = name;
-        this.skillLevel = skillLevel;
-        this.height = height;
-        this.type = type;
-        this.favoriteHorses = new Horse[3];
+    /**
+     * Constructor for rider.
+     * 
+     */
+    public Rider(int id, String name, SkillLevel skillLevel, int height, Type type) {
+        super(id, name, skillLevel, height, type);
+        this.favoriteHorses = new Pair[3];
     }
 
     /**
-     * @return the height
+     * Constructor for rider with automated values for testing.
      */
-    public int getHeight() {
-        return height;
-    }
-
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @return the skillLevel
-     */
-    public String getSkillLevel() {
-        return skillLevel;
-    }
-
-    /**
-     * @return the type
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * @param height the height to set
-     */
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * @param skillLevel the skillLevel to set
-     */
-    public void setSkillLevel(String skillLevel) {
-        this.skillLevel = skillLevel;
-    }
-
-    /**
-     * @param type the type to set
-     */
-    public void setType(String type) {
-        this.type = type;
+    public Rider(int id) {
+        super(id, "RiderName" + id, new SkillLevel(999), 123, new Type(999));
+        this.favoriteHorses = new Pair[3];
     }
 
     /**
      * @param favoriteHorses the favoriteHorses to set
      */
-    public void setFavoriteHorses(Horse[] favoriteHorses) {
+    public void setFavoriteHorses(Pair[] favoriteHorses) {
         this.favoriteHorses = favoriteHorses;
     }
 
     /**
      * @return the favoriteHorses
      */
-    public Horse[] getFavoriteHorses() {
+    public Pair[] getFavoriteHorses() {
         return favoriteHorses;
     }
 
+    @Override
     public String toString() {
+
         String horses = "";
         for (int i = 0; i < favoriteHorses.length; i++) {
             if (favoriteHorses[i] == null) {
-                horses += "NaN \n";
+                horses += "No horse \n";
             } else {
-                horses += favoriteHorses[i].getName() + "\n";
+                horses += favoriteHorses[i].getHorse().getName() + "\n";
             }
         }
-        return "RIDER INFO: \n" + this.id + ". " + "Name: " + this.name + "\n" + "Skill Level: " + this.skillLevel
-                + "\n" + "Height: " + this.height + " cm \n" + "Type: " + this.type + "\nTop 3 horses: \n" + horses;
+
+        return "RIDER INFO: \n" 
+                + this.id + ". " + "Name: " + this.name + "\n" 
+                + "Skill Level: " + skillLevel + "\n" 
+                + "Height: " + this.height + " cm \n"
+                + "Type: " + super.getType() + "\nTop 3 horses: \n" 
+                + horses;
     }
 
 }
