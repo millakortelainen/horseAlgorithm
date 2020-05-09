@@ -10,7 +10,7 @@ import horsealgorithm.domain.*;
  */
 public class UI {
 
-    public void start(SkillLevel sl, Type t) {
+    public void start(SkillLevel sl, Type t, RandomGenerator rg) {
 
         Scanner reader = new Scanner(System.in);
         System.out.println("Welcome!");
@@ -21,8 +21,8 @@ public class UI {
         System.out.println("How many riders there are?");
         int numberOfRiders = Integer.parseInt(reader.nextLine());
         System.out.println("*generating " + numberOfHorses + " horses and " + numberOfRiders + " riders*");
-        Horse[] horses = new HorseFactory().makeHorses(numberOfHorses, t, sl);
-        Rider[] riders = new RiderFactory().makeRiders(numberOfRiders, sl ,t);
+        Horse[] horses = new HorseFactory().makeHorses(numberOfHorses, t, sl, rg);
+        Rider[] riders = new RiderFactory().makeRiders(numberOfRiders, sl ,t, rg);
         Pair[] pairs = new PairFactory().pairAll(horses, riders);
         while (true) {
             System.out.println("Press \n" + "1: show horses \n" + "2: show riders \n"

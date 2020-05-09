@@ -12,17 +12,19 @@ public class RiderFactoryTest {
     RiderFactory rf;
     SkillLevel sl;
     Type t;
+    RandomGenerator rg;
 
     @Before
     public void setUp() {
         rf = new RiderFactory();
         sl = new SkillLevel();
         t = new Type();
+        rg = new RandomGenerator();
     }
 
     @Test
     public void randomRiderIsCreated() {
-        Rider r = rf.makeRider(sl, t);
+        Rider r = rf.makeRider(sl, t, rg);
         assertNotNull(r);
         assertEquals(1, r.getId());
         assertNotEquals(999, r.getSkillLevel());
@@ -34,7 +36,7 @@ public class RiderFactoryTest {
     @Test
     public void manyRidersAreCreated() {
         int n = 100;
-        Rider[] riders = rf.makeRiders(n, sl, t);
+        Rider[] riders = rf.makeRiders(n, sl, t, rg);
 
         boolean pass = true;
         for (int i = 0; i < n; i++) {
@@ -49,7 +51,7 @@ public class RiderFactoryTest {
     @Test
     public void manyRidersAreCreated2() {
         int n = 100;
-        Rider[] riders = rf.makeRiders(n, sl, t);
+        Rider[] riders = rf.makeRiders(n, sl, t, rg);
 
         boolean pass = true;
         for (int i = 0; i < n; i++) {
@@ -65,12 +67,11 @@ public class RiderFactoryTest {
 
     @Test
     public void manyRidersAreCreated3() {
-        int n = 100;
-        Rider[] riders = rf.makeRiders(n, sl, t);
+        int n = 10000;
+        Rider[] riders = rf.makeRiders(n, sl, t, rg);
 
         boolean pass = true;
         for (int i = 0; i < n; i++) {
-
             if (riders[i].getSkillLevel().getSkillLevelNumber() > sl.numberOfSkillLevels()
                     || riders[i].getSkillLevel().getSkillLevelNumber() < 1) {
                 pass = false;
@@ -83,7 +84,7 @@ public class RiderFactoryTest {
     @Test
     public void manyRidersAreCreated4() {
         int n = 100;
-        Rider[] riders = rf.makeRiders(n, sl, t);
+        Rider[] riders = rf.makeRiders(n, sl, t, rg);
 
         boolean pass = true;
         for (int i = 0; i < n; i++) {

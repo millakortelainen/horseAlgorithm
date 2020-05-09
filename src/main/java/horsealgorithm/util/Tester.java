@@ -3,18 +3,42 @@ package horsealgorithm.util;
 import horsealgorithm.domain.*;
 
 public class Tester {
+    MatchCalculator mc = new MatchCalculator();
+    SkillLevel sl = new SkillLevel();
+    RandomGenerator rg = new RandomGenerator();
+    Type t = new Type();
+
     public void run() {
         int n = 50;
-        MatchCalculator mc = new MatchCalculator();
-        SkillLevel sl = new SkillLevel();
-        Type t = new Type();
         // first one is slow
-        Horse[] horses = new HorseFactory().makeHorses(10, t, sl);
-        Rider[] riders = new RiderFactory().makeRiders(10, sl, t);
+        Horse[] horses = new HorseFactory().makeHorses(10, t, sl, rg);
+        Rider[] riders = new RiderFactory().makeRiders(10, sl, t, rg);
         mc.gsAlgorithmForPairing(horses, riders);
-        System.out.println("10 riders and horses");
+
+        // real tests
+        testGSA(n, 10);
+        testGSA(n, 100);
+        testGSA(n, 1000);
+        testGSA(n, 10000);
+        testGSA(n, 100000);
+        testGSA(n, 1000000);
+
+        System.out.println("****");
+        System.out.println("Testing brute force algorithm");
+        Pair[] pairs = new PairFactory().pairAll(horses, riders);
+        mc.calculateAllScores(pairs);
+        testBrute(n, 1);
+        testBrute(n, 10);
+        testBrute(n, 100);
+        testBrute(n, 1000);
+
+    }
+
+    public void testGSA(int n, int numberOfHorsesAndRiders) {
+        System.out.println(numberOfHorsesAndRiders + " riders and horses");
         long sum = 0;
-        
+        Horse[] horses = new HorseFactory().makeHorses(numberOfHorsesAndRiders, t, sl, rg);
+        Rider[] riders = new RiderFactory().makeRiders(numberOfHorsesAndRiders, sl, t, rg);
         for (int i = 0; i < n; i++) {
             long time = System.nanoTime();
             mc.gsAlgorithmForPairing(horses, riders);
@@ -22,64 +46,21 @@ public class Tester {
         }
         long avg = sum / n;
         System.out.println("average " + (avg / 1000000.0) + "ms");
+    }
 
-        System.out.println("100 riders and horses");
-        sum = 0;
-        horses = new HorseFactory().makeHorses(100, t, sl);
-        riders = new RiderFactory().makeRiders(100, sl, t);
-        for (int i = 0; i < n; i++) {
-            long time = System.nanoTime();
-            mc.gsAlgorithmForPairing(horses, riders);
-            sum += System.nanoTime() - time;
-        }
-        avg = sum / n;
-        System.out.println("average " + (avg / 1000000.0) + "ms");
+    public void testBrute(int n, int numberOfHorsesAndRiders) {
+        System.out.println(numberOfHorsesAndRiders + "riders and horses");
 
-        System.out.println("1000 riders and horses");
-        sum = 0;
-        horses = new HorseFactory().makeHorses(1000, t, sl);
-        riders = new RiderFactory().makeRiders(1000, sl, t);
-        for (int i = 0; i < n; i++) {
-            long time = System.nanoTime();
-            mc.gsAlgorithmForPairing(horses, riders);
-            sum += System.nanoTime() - time;
-        }
-        avg = sum / n;
-        System.out.println("average " + (avg / 1000000.0) + "ms");
-
-        System.out.println("10000 riders and horses");
-        sum = 0;
-        horses = new HorseFactory().makeHorses(10000, t, sl);
-        riders = new RiderFactory().makeRiders(10000,sl, t);
-        for (int i = 0; i < n; i++) {
-            long time = System.nanoTime();
-            mc.gsAlgorithmForPairing(horses, riders);
-            sum += System.nanoTime() - time;
-        }
-        avg = sum / n;
-        System.out.println("average " + (avg / 1000000.0) + "ms");
-
-        System.out.println("100000 riders and horses");
-        sum = 0;
-        horses = new HorseFactory().makeHorses(100000, t, sl);
-        riders = new RiderFactory().makeRiders(100000, sl, t);
-        for (int i = 0; i < n; i++) {
-            long time = System.nanoTime();
-            mc.gsAlgorithmForPairing(horses, riders);
-            sum += System.nanoTime() - time;
-        }
-        avg = sum / n;
-        System.out.println("average " + (avg / 1000000.0) + "ms");
-
-        System.out.println("****");
-        horses = new HorseFactory().makeHorses(1000, t, sl);
-        riders = new RiderFactory().makeRiders(1000, sl, t);
+        long sum = 0;
+        Horse[] horses = new HorseFactory().makeHorses(numberOfHorsesAndRiders, t, sl, rg);
+        Rider[] riders = new RiderFactory().makeRiders(numberOfHorsesAndRiders, sl, t, rg);
         Pair[] pairs = new PairFactory().pairAll(horses, riders);
         for (int i = 0; i < n; i++) {
             long time = System.nanoTime();
             mc.calculateAllScores(pairs);
-            System.out.println(System.nanoTime() - time);
+            sum += System.nanoTime() - time;
         }
-
+        long avg = sum / n;
+        System.out.println("average " + (avg / 1000000.0) + "ms");
     }
 }

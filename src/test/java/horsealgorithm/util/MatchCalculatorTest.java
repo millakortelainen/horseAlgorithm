@@ -11,18 +11,20 @@ public class MatchCalculatorTest {
     MatchCalculator m;
     SkillLevel sl;
     Type t;
+    RandomGenerator rg;
 
     @Before
     public void setUp() {
         m = new MatchCalculator();
         sl = new SkillLevel();
         t = new Type();
+        rg = new RandomGenerator();
     }
 
     @Test
     public void calculateAllScoresTest() {
-        Horse[] horses = new HorseFactory().makeHorses(3, t, sl);
-        Rider[] riders = new RiderFactory().makeRiders(3, sl, t);
+        Horse[] horses = new HorseFactory().makeHorses(3, t, sl, rg);
+        Rider[] riders = new RiderFactory().makeRiders(3, sl, t, rg);
         Pair[] pairs = new PairFactory().pairAll(horses, riders);
         Pair[] pairsWithScores = m.calculateAllScores(pairs);
         boolean pass = true;

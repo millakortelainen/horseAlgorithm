@@ -12,17 +12,19 @@ public class HorseFactoryTest {
     HorseFactory hf;
     SkillLevel sl;
     Type t;
+    RandomGenerator rg;
 
     @Before
     public void setUp() {
         hf = new HorseFactory();
         sl = new SkillLevel();
         t = new Type();
+        rg = new RandomGenerator();
     }
 
     @Test
     public void randomHorseIsCreated() {
-        Horse h = hf.makeHorse(t, sl);
+        Horse h = hf.makeHorse(t, sl, rg);
         assertNotNull(h);
         assertEquals(1, h.getId());
         assertNotEquals(999, h.getSkillLevel());
@@ -33,8 +35,8 @@ public class HorseFactoryTest {
 
     @Test
     public void manyHorsesAreCreated() {
-        int n = 100;
-        Horse[] horses = hf.makeHorses(n, t, sl);
+        int n = 100000;
+        Horse[] horses = hf.makeHorses(n, t, sl, rg);
 
         boolean pass = true;
         for (int i = 0; i < n; i++) {
@@ -44,15 +46,17 @@ public class HorseFactoryTest {
             if (horses[i].getId() != i + 1) {
                 pass = false;
             }
-            if (horses[i].getSkillLevel().getSkillLevelNumber() > sl.numberOfSkillLevels() || horses[i].getSkillLevel().getSkillLevelNumber() < 1) {
+            if (horses[i].getSkillLevel().getSkillLevelNumber() > sl.numberOfSkillLevels()
+                    || horses[i].getSkillLevel().getSkillLevelNumber() < 1) {
                 pass = false;
             }
-            if (horses[i].getType().getNumberOfType() > t.numberOfTypes() || horses[i].getType().getNumberOfType() < 1) {
+            if (horses[i].getType().getNumberOfType() > t.numberOfTypes()
+                    || horses[i].getType().getNumberOfType() < 1) {
                 pass = false;
             }
         }
         assertTrue(pass);
-        assertSame(n, horses.length);
+        assertEquals(n, horses.length);
     }
 
 }

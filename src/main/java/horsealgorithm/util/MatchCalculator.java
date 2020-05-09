@@ -3,7 +3,7 @@ package horsealgorithm.util;
 import horsealgorithm.domain.Horse;
 import horsealgorithm.domain.Pair;
 import horsealgorithm.domain.Rider;
-import java.util.ArrayDeque;
+import horsealgorithm.domain.Stack;
 
 /**
  * Class Match Calculator is a calculator which calculates scores of horse-rider
@@ -51,7 +51,7 @@ public class MatchCalculator {
 
         Pair[] horsesRider = new Pair[horses.length];
 
-        ArrayDeque<Rider> freeRiders = new ArrayDeque<>();
+        Stack<Rider> freeRiders = new Stack<>();
 
         for (Rider rider : riders) {
             freeRiders.add(rider);
