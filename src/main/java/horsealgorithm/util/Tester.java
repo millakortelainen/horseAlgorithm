@@ -7,13 +7,14 @@ public class Tester {
     SkillLevel sl = new SkillLevel();
     RandomGenerator rg = new RandomGenerator();
     Type t = new Type();
+    ScoreCalculator sc = new ScoreCalculator();
 
     public void run() {
         int n = 50;
         // first one is slow
         Horse[] horses = new HorseFactory().makeHorses(10, t, sl, rg);
         Rider[] riders = new RiderFactory().makeRiders(10, sl, t, rg);
-        mc.gsAlgorithmForPairing(horses, riders);
+        mc.gsAlgorithmForPairing(horses, riders, sc);
 
         // real tests
         testGSA(n, 10);
@@ -31,6 +32,7 @@ public class Tester {
         testBrute(n, 10);
         testBrute(n, 100);
         testBrute(n, 1000);
+        testBrute(n, 10000);
 
     }
 
@@ -41,7 +43,7 @@ public class Tester {
         Rider[] riders = new RiderFactory().makeRiders(numberOfHorsesAndRiders, sl, t, rg);
         for (int i = 0; i < n; i++) {
             long time = System.nanoTime();
-            mc.gsAlgorithmForPairing(horses, riders);
+            mc.gsAlgorithmForPairing(horses, riders, sc);
             sum += System.nanoTime() - time;
         }
         long avg = sum / n;

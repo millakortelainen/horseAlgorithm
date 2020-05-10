@@ -47,7 +47,7 @@ public class MatchCalculator {
      * @param riders riders to be paired
      * @return array of optimal pairs.
      */
-    public Pair[] gsAlgorithmForPairing(Horse[] horses, Rider[] riders) {
+    public Pair[] gsAlgorithmForPairing(Horse[] horses, Rider[] riders, ScoreCalculator sc) {
 
         Pair[] horsesRider = new Pair[horses.length];
 
@@ -59,18 +59,30 @@ public class MatchCalculator {
 
         while (!freeRiders.isEmpty()) {
             Rider r = freeRiders.poll();
+            boolean favoriteHorseWasFree = false;
             for (int i = 0; i < 3; i++) {
+                
                 Pair ridersFavorite = r.getFavoriteHorses()[i];
                 if (ridersFavorite == null) {
                     continue;
                 }
                 if (horseDoesNotHaveRider(horsesRider, ridersFavorite)) {
                     horsesRider = setRiderToHorse(horsesRider, ridersFavorite);
+                    favoriteHorseWasFree = true;
                     break;
                 } else {
                     if (riderHasBetterScore(horsesRider, ridersFavorite)) {
                         freeRiders.add(getHorsesCurrentRider(horsesRider, ridersFavorite));
                         horsesRider = setRiderToHorse(horsesRider, ridersFavorite);
+                        favoriteHorseWasFree = true;
+                        break;
+                    }
+                }
+            }
+            if(!favoriteHorseWasFree){
+                for(int i = 0;i<horsesRider.length;i++){
+                    if(horsesRider[i] ==null){
+                        horsesRider[i] = new Pair(horses[i], r, sc.calculateCompatibility(horses[i],r));
                         break;
                     }
                 }

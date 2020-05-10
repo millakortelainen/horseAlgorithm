@@ -67,7 +67,7 @@ public class UI {
     }
 
     public void calculateBestPairs(Horse[] horses, Rider[] riders) {
-        Pair[] horsesRider = new MatchCalculator().gsAlgorithmForPairing(horses, riders);
+        Pair[] horsesRider = new MatchCalculator().gsAlgorithmForPairing(horses, riders, new ScoreCalculator());
         for (int i = 0; i < horsesRider.length; i++) {
             if(horsesRider[i] == null){
                 continue;
