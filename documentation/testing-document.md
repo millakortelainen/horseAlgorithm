@@ -14,9 +14,9 @@ The performance of the application is tested in the class called "Tester.java". 
 
 ## What types of input were used in tests
 
-The input for the Gale-Shapely algorithm is generated using the HorseFactory and RiderFactory classes. With these classes given number of riders and horses are generated and then given to the algorithm for processing. The test input is not equal to the programs actual use case because if it were the real use case then the horses and riders should be paired before running the Gale Shapleys algorithm. This should be done because pairing sets the rider's favorite horses and that is used to evaluate the goodness of the some given horse and the rider.
+The input for the Gale-Shapley algorithm is generated using the HorseFactory and RiderFactory classes. With these classes a given number of riders and horses are generated and then given to the algorithm for processing. The test input is not equal to the program's actual use case because if it were the real use case then the horses and riders should be paired before running the Gale-Shapley algorithm. This should be done because pairing sets the rider's favorite horses and that is used to evaluate the goodness of the given horse and the rider.
 
-In brute force performance test randomly generated horses and riders are first paired using the PairFactory class and then each pairs' score is calculated. The tested part is the pair's score calculation, the pairign in of the pairs in PairFactory class is not measured.
+In brute force performance tests randomly generated horses and riders are first paired using the PairFactory class and then each pairs' score is calculated. The tested part is the pair's score calculation, the pairing of the pairs in PairFactory class is not measured.
 
 ## How can the tests be repeated
 
