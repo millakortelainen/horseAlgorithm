@@ -41,9 +41,7 @@ for(int i = 0; i<horseRider.length;i++){
 Because the two loops are nested my time complexity approximation of gsAlgorithmForPairing-method is O(n^2). 
 
 Second important method of MatchCalculator class is calculateAllScores method. First there is for loop wich goes through all the pairs in the list. The pairs here are all the riders paired with the all the horses. Therefore the for loop goes through n*m values where n=number of horses and m=number of riders. Also inside the method is calls for other classes. two first are quite straight forward setter and ScoreCalculator call which I already covered. Method that I have not covered is
-```
-fhh.setFavoritesToRider(p);.
-```
+`fhh.setFavoritesToRider(p);`.
 It calls setFavoritesToRider method from FavoriteHorseHandler class. All the class's methods contains loops. Those loops are single loops so time complexity of the setFavoritesToRider method's time complexity is O(n). In conclusion the time complexity of calculateAllScores method in MatchCalculator class is O(m*n^2). 
 
 In conclusion the time and space complexity of the application is O(m*n^2).
