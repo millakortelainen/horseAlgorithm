@@ -9,14 +9,14 @@
 5. input the amount of horses and riders when application asks it
   - application doesn't mention it but notice that there must be more horses than riders
 6. select the functionality as the application suggests
-´´´
+```
 1: show horses
 2: show riders
 3: calculate the compatibility of horses and riders
 4: calculate best horse for rider
 5: run tests
 6: quit
-´´´
+```
   - for the best result you should use functionalities 3 and 4 in numerical order.
  
 ## What kind of input does the program support?
