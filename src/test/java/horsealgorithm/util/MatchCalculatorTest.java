@@ -12,6 +12,7 @@ public class MatchCalculatorTest {
     SkillLevel sl;
     Type t;
     RandomGenerator rg;
+    ScoreCalculator sc;
 
     @Before
     public void setUp() {
@@ -19,6 +20,7 @@ public class MatchCalculatorTest {
         sl = new SkillLevel();
         t = new Type();
         rg = new RandomGenerator();
+        sc = new ScoreCalculator();
     }
 
     @Test
@@ -84,7 +86,7 @@ public class MatchCalculatorTest {
         Horse[] horses = { new Horse(1), new Horse(2), new Horse(3) };
         Pair[] pairs = new PairFactory().pairAll(horses, riders);
         m.calculateAllScores(pairs);
-        Pair[] all = m.gsAlgorithmForPairing(horses, riders);
+        Pair[] all = m.gsAlgorithmForPairing(horses, riders, sc);
         assertEquals(3, all.length);
 
         boolean pass = true;
@@ -102,7 +104,7 @@ public class MatchCalculatorTest {
         Horse[] horses = { new Horse(1), new Horse(2), new Horse(3), new Horse(4) };
         Pair[] pairs = new PairFactory().pairAll(horses, riders);
         m.calculateAllScores(pairs);
-        Pair[] all = m.gsAlgorithmForPairing(horses, riders);
+        Pair[] all = m.gsAlgorithmForPairing(horses, riders, sc);
         assertEquals(4, all.length);
 
         int nulls = 0;
@@ -148,7 +150,7 @@ public class MatchCalculatorTest {
         Horse[] horses = { h1, h2, h3 };
         Pair[] pairs = new PairFactory().pairAll(horses, riders);
         m.calculateAllScores(pairs);
-        Pair[] all = m.gsAlgorithmForPairing(horses, riders);
+        Pair[] all = m.gsAlgorithmForPairing(horses, riders, sc);
         assertEquals(3, all.length);
 
         assertEquals(r2, all[0].getRider());
