@@ -16,20 +16,21 @@ In the ui-package is one class, the UI-class. This class runs the text user inte
 
 The main functionalities of the applications are in the util-package. In total package contains eight classes. Three of them are factory classes. These factory classes, called HorseFactory, RiderFactory and PairFactory, handle the creating entities of horses, riders and pairs. Horse and rider factories can make one to multiple random riders and horses automatically. The pair factory only pairs all given horses and riders together. I think that the PairFactory is not named in the best manner.
 
-Besides factory classes there are MatchCalculator classes which contain the two main algorithms of the application, the Gale Shapley algorith and the brute force algorithm. ScoreCalculator calculates the score of the given pair using the given rules. RandomGenerator generates random values for application to use. Mostly these values are used in factory classes. Therefore I decided to use the remainder of System.nanoTime() and not to make any specific random number generator for the application. Simply it was not in the main functionalities of the application and random numbers are used mostly generating objects that application uses.
+Besides factory classes there are MatchCalculator classes which contain the two main algorithms of the application, the Gale Shapley algorithm and the brute force algorithm. ScoreCalculator calculates the score of the given pair using the given rules. RandomGenerator generates random values for application to use. Mostly these values are used in factory classes. Therefore I decided to use the remainder of System.nanoTime() and not to make any specific random number generator for the application. Simply it was not in the main functionalities of the application and random numbers are used mostly generating objects that application uses.
 
 The FavoriteHorseHandler class handles the favorite horse array of the rider. The Tester class contains the performance tests for the application.
 
 ## Implemented time and space complexities (big-O complexity analysis of (pseudo)code)
-ScoreCalculator class contains O(n) time code because it is mostly if statements. Factory classes are O(n) complexity, because they contain methods that creates multiple riders and horses in a for loop which loops over all the given riders or horses. RandomGenerator class methods works in O(n) time because the methods only contains mathematical procedures. Although I'm not that sure what is the complexity of the System.nanoTime() function. 
+The ScoreCalculator class contains O(n) time code because it is mostly if statements. Factory classes are O(n) complexity, because they contain methods that create multiple riders and horses in a for loop which loops over all the given riders or horses. RandomGenerator class methods work in O(n) time because the methods only contain mathematical procedures. Although I'm not that sure what the complexity of the System.nanoTime() function.
 
 Estimating the MatchCalculator's main methods i.e. gsAlgorithmForPairing is little tricky for me. The while-loop which processes the riders defines the complexity of the method.
+
 ```
 while(!freeRiders.isEmpty()){
 ..
 }
 ```
-The problem here is the freeRider stack where values are added back once removed, so the amount of n is flexible. I would estimate that complexity of that while loop is O(n) anyways. I'm not sure that what n is here. Inside the while loop is also a for loop. Complexity of that loop is O(n).
+The problem here is the freeRider stack where values are added back once removed, so the amount of n is flexible. I would estimate the complexity of that while loop is O(n) anyways. I'm not sure that what n is here. Inside the while loop is also a for loop. Complexity of that loop is O(n).
 ```
 while(!freeRiders.isEmpty()){
 ..
@@ -38,23 +39,27 @@ for(int i = 0; i<horseRider.length;i++){
     }
 }
 ```
-Because the two loops are nested my time complexity approximation of gsAlgorithmForPairing-method is O(n^2). 
+Because the two loops are nested, my time complexity approximation of gsAlgorithmForPairing-method is O(n^2).
 
-Second important method of MatchCalculator class is calculateAllScores method. First there is for loop wich goes through all the pairs in the list. The pairs here are all the riders paired with the all the horses. Therefore the for loop goes through n*m values where n=number of horses and m=number of riders. Also inside the method is calls for other classes. two first are quite straight forward setter and ScoreCalculator call which I already covered. Method that I have not covered is
+Second important method of the MatchCalculator class is the calculateAllScores method. First there is a for loop which goes through all the pairs in the list. The pairs here are all the riders paired with all the horses. Therefore the for loop goes through `n*m` values where `n=number of horses` and `m=number of riders`. Also inside the method is calls for other classes. two first are quite straightforward setter and ScoreCalculator calls which I already covered. Method that I have not covered is
 `fhh.setFavoritesToRider(p);`.
-It calls setFavoritesToRider method from FavoriteHorseHandler class. All the class's methods contains loops. Those loops are single loops so time complexity of the setFavoritesToRider method's time complexity is O(n). In conclusion the time complexity of calculateAllScores method in MatchCalculator class is O(m*n^2). 
+It is called the setFavoritesToRider method from FavoriteHorseHandler class. All the class's methods contain loops. Those loops are single loops so the time complexity of the setFavoritesToRider method's time complexity is `O(n)`. In conclusion the time complexity of calculateAllScores method in MatchCalculator class is `O(m*n^2)`.
 
-In conclusion the time and space complexity of the application is O(m*n^2).
+Domain package's time complexities are less than util package's time complexity so that's why I'm not covering it here.
+
+In conclusion the time and space complexity of the application is `O(m*n^2)`.
 
 ## Comparative performance and complexity analysis
-When comparing time complexity of Gale Shapley algorithm and so called brute force algorithm which pairs all the horses with all the riders. If we compare the time complexity we kan see that all pairing algorithm has much larger time complecity with the coefficient m. This is seen in the performance tests. The brute force algorithm stops working in 10 000 horss and riders each and the Gale Shapley algorithm still can give pairs to all riders. 
+When comparing time complexity of Gale Shapley algorithm and so called brute force algorithm which pairs all the horses with all the riders. If we compare the time complexity we can see that all pairing algorithms have much larger time complexity with the coefficient m. This is seen in the performance tests. The brute force algorithm stops working in 10 000 horses and riders each and the Gale Shapley algorithm still can give pairs to all riders.
 
-In charts we can also conclude that pairing all the horses and riders is much slower than Gale Shapley algorithm. 
+In charts we can also conclude that pairing all the horses and riders is much slower than the Gale Shapley algorithm.
 
-The result is expected. Pairing all the horses and the riders takes n*m iterations becaus that is how many pairs one can make from n amount of horses and m amount of riders. The Gale Shapley algorithm does not go through all the possible pairings but in fact pairs riders with optimal horse. This needs approximately n amount of iterations where n is amount of riders. Only in the worst case where rider can't get horse from her favorite horses list we need to go through the free horse list and couple more iterations are added to time complexity. This makes Gale Shapley much more faster and intuitively one may think that it assigns horses to smaller audience which is in this case the riders only.
+The result is expected. Pairing all the horses and the riders takes `n*m` iterations because that is how many pairs one can make from n amount of horses and m amount of riders. The Gale Shapley algorithm does not go through all the possible pairings but in fact pairs riders with optimal horses. This needs approximately n amount of iterations where n is amount of riders. Only in the worst case where a rider can't get a horse from her favorite horse list do we need to go through the free horse list and a couple more iterations are added to time complexity. This makes Gale Shapley much faster and intuitively one may think that it assigns horses to smaller audience which is in this case the riders only.
 
 ## Possible flaws and improvements
-Actually the performance tests are not very accurate in terms of application real use case. In real use case first all the riders and horses must be paired before using the Gale Shapley algorithm. This is not the test case in the performance tests. Performance test does not pair the horses and riders before using the Gale Shapley algorithm. This mean that it does not make "happy couples" as mentioned in Gale Shapley Wikipedia page.
+Actually the performance tests are not very accurate in terms of application real use cases. In real use cases first all the riders and horses must be paired before using the Gale Shapley algorithm. This is not the test case in the performance tests. Performance test does not pair the horses and riders before using the Gale Shapley algorithm. This mean that it does not make "happy couples" as mentioned in Gale Shapley Wikipedia page.
+
+Another flaw in the application is that the amount of horses should be equal to or more than the amount of riders. Anyhow the application does not inform the user anyway about this.
 
 ## Sources
-TODO
+Tietorakneteet ja algoritmit 2020, Antti Laaksonen, 
