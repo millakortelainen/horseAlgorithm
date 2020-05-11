@@ -26,7 +26,9 @@ The performance test of the application can be repeated by starting the applicat
 
 ## Results of empirical testing presented in graphical form
 
-!()[img/1.png "Gale Shapley algorithm"]
+![Gale Shapely](img/1.png "Gale Shapley algorithm")
+Graph: Graph of Gale Shapley performance test
 
-!()[img/2.png "Brute force"]
+![Brute force](img/2.png "Brute force")
+Graph: Graph of brute force performance test
     
