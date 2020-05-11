@@ -5,7 +5,7 @@
 
 The application is unit tested by JUnit.
 
-[insert here stuff from jacoco]
+![jacocoTestRepoort](documentation/img/3.png "Jacoco test report")
 
 The performance of the application is tested in the class called "Tester.java". The performance tests use Java function System.nanotime() to conclude the duration of opertaion of the algorithms. The Gale-Shapley algorithm is tested 50 times with parameters of 10, 100, 1 000, 10 000 and 100 000 pairs of horses and riders. Then the average of these runs is calculated to determine the performance of the algorithm.
 
