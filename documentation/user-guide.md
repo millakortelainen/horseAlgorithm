@@ -23,4 +23,4 @@
 Program supports numerical input via text user interface from the user.
 
 ## Executable .jar-file
-??
+Executable .jar-file can be found `horseAlgorithm/build/libs`. Run the jar-file with command `java -jar build/libs/horsealgorithm.jar`. 
