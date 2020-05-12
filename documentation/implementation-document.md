@@ -61,9 +61,11 @@ In charts we can also conclude that pairing all the horses and riders is much sl
 The result is expected. Pairing all the horses and the riders takes `n*m` iterations because that is how many pairs one can make from n amount of horses and m amount of riders. The Gale Shapley algorithm does not go through all the possible pairings but in fact pairs riders with optimal horses. This needs approximately n amount of iterations where n is amount of riders. Only in the worst case where a rider can't get a horse from her favorite horse list do we need to go through the free horse list and a couple more iterations are added to time complexity. This makes Gale Shapley much faster and intuitively one may think that it assigns horses to smaller audience which is in this case the riders only.
 
 ## Possible flaws and improvements
-Actually the performance tests are not very accurate in terms of application real use cases. In real use cases first all the riders and horses must be paired before using the Gale Shapley algorithm. This is not the test case in the performance tests. Performance test does not pair the horses and riders before using the Gale Shapley algorithm. This mean that it does not make "happy couples" as mentioned in Gale Shapley Wikipedia page.
+
+Actually the performance tests are not very accurate in terms of application real use cases. In real use cases first all the riders and horses must be paired before using the Gale Shapley algorithm. This is not the test case in the performance tests. Performance test does not pair the horses and riders before using the Gale Shapley algorithm. This means that it does not make "happy couples" as mentioned in the Gale Shapley Wikipedia page.
 
 Another flaw in the application is that the amount of horses should be equal to or more than the amount of riders. Anyhow the application does not inform the user anyway about this.
 
+
 ## Sources
-Tietorakneteet ja algoritmit 2020, Antti Laaksonen, 
+Antti Laaksonen, "Tiettorakenteet ja algoritmit", 2020
