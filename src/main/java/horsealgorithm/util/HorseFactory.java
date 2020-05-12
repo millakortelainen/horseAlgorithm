@@ -9,11 +9,16 @@ import horsealgorithm.domain.Type;
  */
 public class HorseFactory {
 
-    private String[] names = { "Gomer", "Donkey", "Radio Flyer", "Hoofer", "Lostma Cowboy", "Klip Klop", "Foalovit",
-            "Clodhopper", "Waffle House", "Ed", "Bartholomew", "LumberJack", "Bucktooth", "Loco", "Sir Topham Hatt",
-            "General Tso", "Carrots", "Hall & Oats", "Overbite", "Sprinkles", "Bandito", "Lollygagger", "Heisenberg",
-            "Hemi", "Frankenstein", "Horsepower", "Moose", "Bing Bong", "Rainbow Unicorn", "Rusty Saddle",
-            "Transmission", "Crouching Tiger", "Cowboy", "Jalopy", "Stable Boy", "Foxtrot" };
+    private String[] names = { "Gomer", "Donkey", "Radio Flyer", 
+        "Hoofer", "Lostma Cowboy", "Klip Klop", "Foalovit",
+        "Clodhopper", "Waffle House", "Ed", "Bartholomew", 
+        "LumberJack", "Bucktooth", "Loco", "Sir Topham Hatt",
+        "General Tso", "Carrots", "Hall & Oats", "Overbite", 
+        "Sprinkles", "Bandito", "Lollygagger", "Heisenberg",
+        "Hemi", "Frankenstein", "Horsepower", "Moose", "Bing Bong", 
+        "Rainbow Unicorn", "Rusty Saddle",
+        "Transmission", "Crouching Tiger", "Cowboy", 
+        "Jalopy", "Stable Boy", "Foxtrot" };
 
     private int lastID = 0;
 

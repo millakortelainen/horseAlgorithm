@@ -1,9 +1,19 @@
 package horsealgorithm.ui;
 
-import java.util.Scanner;
+import horsealgorithm.domain.Horse;
+import horsealgorithm.domain.Pair;
+import horsealgorithm.domain.Rider;
+import horsealgorithm.domain.SkillLevel;
+import horsealgorithm.domain.Type;
+import horsealgorithm.util.HorseFactory;
+import horsealgorithm.util.MatchCalculator;
+import horsealgorithm.util.PairFactory;
+import horsealgorithm.util.RandomGenerator;
+import horsealgorithm.util.RiderFactory;
+import horsealgorithm.util.ScoreCalculator;
+import horsealgorithm.util.Tester;
 
-import horsealgorithm.util.*;
-import horsealgorithm.domain.*;
+import java.util.Scanner;
 
 /**
  * User Inteface of the application.
@@ -22,7 +32,7 @@ public class UI {
         int numberOfRiders = Integer.parseInt(reader.nextLine());
         System.out.println("*generating " + numberOfHorses + " horses and " + numberOfRiders + " riders*");
         Horse[] horses = new HorseFactory().makeHorses(numberOfHorses, t, sl, rg);
-        Rider[] riders = new RiderFactory().makeRiders(numberOfRiders, sl ,t, rg);
+        Rider[] riders = new RiderFactory().makeRiders(numberOfRiders, sl, t, rg);
         Pair[] pairs = new PairFactory().pairAll(horses, riders);
         while (true) {
             System.out.println("Press \n" + "1: show horses \n" + "2: show riders \n"
@@ -69,14 +79,14 @@ public class UI {
     public void calculateBestPairs(Horse[] horses, Rider[] riders) {
         Pair[] horsesRider = new MatchCalculator().gsAlgorithmForPairing(horses, riders, new ScoreCalculator());
         for (int i = 0; i < horsesRider.length; i++) {
-            if(horsesRider[i] == null){
+            if (horsesRider[i] == null) {
                 continue;
             }
             System.out.println(horsesRider[i]);
         }
     }
 
-    public void runTests(){
+    public void runTests() {
         new Tester().run();
     }
 

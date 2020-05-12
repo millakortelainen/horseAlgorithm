@@ -9,12 +9,15 @@ import horsealgorithm.domain.Type;
  */
 public class RiderFactory {
 
-    private String[] names = { "Julius Meyer", "Emmett Talley", "Barry Ball", "Lsuther Meyer", "Howard Miller",
-            "Jonathan Woodard", "Marvin Blair", "Keith Burgess", "Nathan Bates", "Max Downs", "Carolyn Reed",
-            "Edith Raymond", "Virginia Byers", "Alice Gordon", "Becky Mullins", "Janice Johnston", "Stacy Roach",
-            "Dawn Butler", "Jasmin Ryan", "Peyton Mooney", "Gene Jacobson", "Woodrow Yates", "Dick Richardson",
-            "Louis McCoy", "Vincent Keller", "Lester Hamilton", "Micheal Jacobson", "Jay Norton", "Angel Galloway",
-            "Bryce Hyde" };
+    private String[] names = { "Julius Meyer", "Emmett Talley", 
+        "Barry Ball", "Lsuther Meyer", "Howard Miller",
+        "Jonathan Woodard", "Marvin Blair", "Keith Burgess", 
+        "Nathan Bates", "Max Downs", "Carolyn Reed",
+        "Edith Raymond", "Virginia Byers", "Alice Gordon", 
+        "Becky Mullins", "Janice Johnston", "Stacy Roach",
+        "Dawn Butler", "Jasmin Ryan", "Peyton Mooney", "Gene Jacobson", 
+        "Woodrow Yates", "Dick Richardson", "Louis McCoy", "Vincent Keller", 
+        "Lester Hamilton", "Micheal Jacobson", "Jay Norton", "Angel Galloway", "Bryce Hyde" };
 
     private int lastID = 0;
 

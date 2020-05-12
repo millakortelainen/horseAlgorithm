@@ -15,9 +15,8 @@ public class MatchCalculator {
     ScoreCalculator sc;
 
     /**
-     * Constructor for match calculator. 
-     * Constructor set up favorite horse handler and score calculator 
-     * for the class.
+     * Constructor for match calculator. Constructor set up favorite horse handler
+     * and score calculator for the class.
      */
     public MatchCalculator() {
         this.fhh = new FavoriteHorseHandler();
@@ -61,7 +60,7 @@ public class MatchCalculator {
             Rider r = freeRiders.poll();
             boolean favoriteHorseWasFree = false;
             for (int i = 0; i < 3; i++) {
-                
+
                 Pair ridersFavorite = r.getFavoriteHorses()[i];
                 if (ridersFavorite == null) {
                     continue;
@@ -79,10 +78,11 @@ public class MatchCalculator {
                     }
                 }
             }
-            if(!favoriteHorseWasFree){
-                for(int i = 0;i<horsesRider.length;i++){
-                    if(horsesRider[i] ==null){
-                        horsesRider[i] = new Pair(horses[i], r, sc.calculateCompatibility(horses[i],r));
+            if (!favoriteHorseWasFree) {
+                for (int i = 0; i < horsesRider.length; i++) {
+                    if (horsesRider[i] == null) {
+                        horsesRider[i] = new Pair(horses[i], r, 
+                                                  sc.calculateCompatibility(horses[i], r));
                         break;
                     }
                 }
@@ -105,11 +105,10 @@ public class MatchCalculator {
     /**
      * Checks if the horse has a rider already
      * 
-     * @param horsesRider array of the horses' riders.
-     * every index corresponds to horses id.
-     * @param p pair which horse's rider is checked
-     * @return true if horse has a rider,
-     * false if horse does not have a rider
+     * @param horsesRider array of the horses' riders. every index corresponds to
+     *                    horses id.
+     * @param p           pair which horse's rider is checked
+     * @return true if horse has a rider, false if horse does not have a rider
      */
     public boolean horseDoesNotHaveRider(Pair[] horsesRider, Pair p) {
         return horsesRider[horseId(p) - 1] == null;
@@ -118,9 +117,9 @@ public class MatchCalculator {
     /**
      * set rider to the horse
      * 
-     * @param horsesRider array of horses and their according riders. 
-     * array's index is horses id-1.
-     * @param p pair which horse's rider is set
+     * @param horsesRider array of horses and their according riders. array's index
+     *                    is horses id-1.
+     * @param p           pair which horse's rider is set
      * @return updated array of horse's rider
      */
     public Pair[] setRiderToHorse(Pair[] horsesRider, Pair p) {
@@ -132,7 +131,7 @@ public class MatchCalculator {
      * Check what is the score of the horse's current rider
      * 
      * @param horsesRider array of all the horses riders
-     * @param p pair which horse's rider score is checked
+     * @param p           pair which horse's rider score is checked
      * @return score of the horse-rider combination
      */
     public double horsesCurrentRidersScore(Pair[] horsesRider, Pair p) {
@@ -143,9 +142,9 @@ public class MatchCalculator {
      * Compares pairs score to the existing pair's score
      * 
      * @param horsesRider array of the all riders of the horses
-     * @param p pair which score is compared to
-     * @return true if compared pairs p score is higher,
-     * false id already existing pair has a higher score
+     * @param p           pair which score is compared to
+     * @return true if compared pairs p score is higher, false id already existing
+     *         pair has a higher score
      */
     public boolean riderHasBetterScore(Pair[] horsesRider, Pair p) {
         return horsesCurrentRidersScore(horsesRider, p) < p.getScore();
@@ -155,8 +154,8 @@ public class MatchCalculator {
      * Returns the curren rider of the horse according to horsesRider array
      * 
      * @param horsesRider array where the horse's rider can be found
-     * @param p pair which horses rider is returned
-     * @return rider of the horse according to horseRider array 
+     * @param p           pair which horses rider is returned
+     * @return rider of the horse according to horseRider array
      */
     public Rider getHorsesCurrentRider(Pair[] horsesRider, Pair p) {
         return horsesRider[p.getHorse().getId() - 1].getRider();
