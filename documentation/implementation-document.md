@@ -2,7 +2,11 @@
 
 ## Overview of the overall implementation
 
-The application ended up altering from the project specification. I didn't implement the rider's experience parameter or riding lesson as intended. I'm quite happy how the code turned out. The unit test coverage is also pretty good. The functionality of the application is not as good as I would like it to be.
+The application ended up altering from the project specification. I didn't implement the rider's experience parameter or riding lessons as intended. These features would have been interesting to implement but unfortunately schedule wouldn't approve it. I'm quite happy how the code turned out and I think that checkstyle agrees with me. There are a couple checkstyle errors in Main, UI and Tester class but in other classes there is none. These three classes were left with errors as intended. The unit test coverage is also pretty good. More of that can be read from the testing document.
+
+The functionality of the application is not as good as I would like it to be. For example I think it is unfunctional that a user must first pair all the horses and riders together before calculating the optimal pairs with the Gale Shapley algorithm. There I considered other approaches such as calculating the score of pairs right at the start of the application. After all, all pairs are created at the same time as the riders and horses are created. Then I discarded this idea because I thought that the calculating was not to be done in such a hidden manner to the user. One minor functional flaw is that printing of pairs is  confusing.
+
+After all, I'm happy that I did finish the Gale Shapley algorithm and even comparing it to the brute force algorithm is possible.
 
 ## Project structure
 
